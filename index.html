@@ -50,8 +50,8 @@ items.forEach(item => {
       img: img,
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      dx: (Math.random() - 0.5) * 2,
-      dy: (Math.random() - 0.5) * 2
+      dx: (Math.random() - 0.5) * 6, // 3x speed
+      dy: (Math.random() - 0.5) * 6
     });
   };
 });
@@ -61,24 +61,24 @@ function draw() {
   floatingObjects.forEach(obj => {
     ctx.shadowColor = obj.color;
     ctx.shadowBlur = 20;
-    ctx.drawImage(obj.img, obj.x, obj.y, 40, 40);
+    ctx.drawImage(obj.img, obj.x, obj.y, 60, 60); // 1.5x size
 
-    ctx.font = "14px Arial";
+    ctx.font = "21px Arial";
     ctx.fillStyle = obj.color;
-    ctx.fillText(obj.name, obj.x + 45, obj.y + 25);
+    ctx.fillText(obj.name, obj.x + 65, obj.y + 35);
 
     obj.x += obj.dx;
     obj.y += obj.dy;
 
-    if (obj.x < 0 || obj.x + 40 > canvas.width) obj.dx *= -1;
-    if (obj.y < 0 || obj.y + 40 > canvas.height) obj.dy *= -1;
+    if (obj.x < 0 || obj.x + 60 > canvas.width) obj.dx *= -1;
+    if (obj.y < 0 || obj.y + 60 > canvas.height) obj.dy *= -1;
 
     floatingObjects.forEach(other => {
       if (other !== obj) {
         const dx = obj.x - other.x;
         const dy = obj.y - other.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < 50) {
+        if (distance < 70) {
           obj.dx *= -1;
           obj.dy *= -1;
         }
