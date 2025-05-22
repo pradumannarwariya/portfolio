@@ -1,73 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Neon Tech Background</title>
+  <title>Neon Background</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: #0a001a; /* very dark blackish violet */
       overflow: hidden;
-      font-family: Arial, sans-serif;
+      background-color: #0d0221; /* Persian blue-purple dark */
     }
-
-    .floating-icon {
-      position: absolute;
-      color: white;
-      font-size: 2rem;
-      font-weight: bold;
-      animation: float 20s linear infinite;
-      opacity: 0.4;
-      white-space: nowrap;
+    canvas {
+      display: block;
     }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0.4;
-      }
-      100% {
-        transform: translateY(-200vh) rotate(360deg);
-        opacity: 0.8;
-      }
-    }
-
-    /* Neon colors based on logos */
-    .python    { color: #306998; text-shadow: 0 0 8px #306998; }
-    .java      { color: #f89820; text-shadow: 0 0 8px #f89820; }
-    .cpp       { color: #00599C; text-shadow: 0 0 8px #00599C; }
-    .html      { color: #e34c26; text-shadow: 0 0 8px #e34c26; }
-    .css       { color: #264de4; text-shadow: 0 0 8px #264de4; }
-    .js        { color: #f0db4f; text-shadow: 0 0 8px #f0db4f; }
-    .react     { color: #61dafb; text-shadow: 0 0 8px #61dafb; }
-    .node      { color: #68a063; text-shadow: 0 0 8px #68a063; }
-    .next      { color: #ffffff; text-shadow: 0 0 8px #ffffff; }
-    .mongo     { color: #4DB33D; text-shadow: 0 0 8px #4DB33D; }
-    .mysql     { color: #00758f; text-shadow: 0 0 8px #00758f; }
-    .php       { color: #8892BF; text-shadow: 0 0 8px #8892BF; }
-    .typescript{ color: #3178c6; text-shadow: 0 0 8px #3178c6; }
-    .flutter   { color: #02569B; text-shadow: 0 0 8px #02569B; }
-    .firebase  { color: #FFCA28; text-shadow: 0 0 8px #FFCA28; }
   </style>
 </head>
 <body>
-  <!-- Floating Logos/Text -->
-  <div class="floating-icon python"    style="left: 10%;">Python</div>
-  <div class="floating-icon java"      style="left: 20%;">Java</div>
-  <div class="floating-icon cpp"       style="left: 30%;">C++</div>
-  <div class="floating-icon html"      style="left: 40%;">HTML</div>
-  <div class="floating-icon css"       style="left: 50%;">CSS</div>
-  <div class="floating-icon js"        style="left: 60%;">JavaScript</div>
-  <div class="floating-icon react"     style="left: 70%;">React</div>
-  <div class="floating-icon node"      style="left: 80%;">Node.js</div>
-  <div class="floating-icon next"      style="left: 90%;">Next.js</div>
-  <div class="floating-icon mongo"     style="left: 15%;">MongoDB</div>
-  <div class="floating-icon mysql"     style="left: 25%;">MySQL</div>
-  <div class="floating-icon php"       style="left: 35%;">PHP</div>
-  <div class="floating-icon typescript"style="left: 45%;">TypeScript</div>
-  <div class="floating-icon flutter"   style="left: 55%;">Flutter</div>
-  <div class="floating-icon firebase"  style="left: 65%;">Firebase</div>
+  <canvas id="bgCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;const items = [
+  { name: "Python", color: "#306998", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "Java", color: "#f89820", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+  { name: "C++", color: "#00599C", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+  { name: "HTML", color: "#e34c26", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+  { name: "CSS", color: "#264de4", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+  { name: "JavaScript", color: "#f0db4f", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "React", color: "#61dafb", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Node.js", color: "#68a063", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Next.js", color: "#ffffff", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "MongoDB", color: "#4DB33D", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+  { name: "MySQL", color: "#00758f", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "PHP", color: "#8892BF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+  { name: "TypeScript", color: "#3178c6", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "Flutter", color: "#02569B", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+  { name: "Firebase", color: "#FFCA28", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
+];
+
+const floatingObjects = [];
+
+items.forEach(item => {
+  const img = new Image();
+  img.src = item.img;
+  img.onload = () => {
+    floatingObjects.push({
+      name: item.name,
+      color: item.color,
+      img: img,
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      dx: (Math.random() - 0.5) * 2,
+      dy: (Math.random() - 0.5) * 2
+    });
+  };
+});
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  floatingObjects.forEach(obj => {
+    ctx.shadowColor = obj.color;
+    ctx.shadowBlur = 20;
+    ctx.drawImage(obj.img, obj.x, obj.y, 40, 40);
+
+    ctx.font = "14px Arial";
+    ctx.fillStyle = obj.color;
+    ctx.fillText(obj.name, obj.x + 45, obj.y + 25);
+
+    obj.x += obj.dx;
+    obj.y += obj.dy;
+
+    if (obj.x < 0 || obj.x + 40 > canvas.width) obj.dx *= -1;
+    if (obj.y < 0 || obj.y + 40 > canvas.height) obj.dy *= -1;
+
+    floatingObjects.forEach(other => {
+      if (other !== obj) {
+        const dx = obj.x - other.x;
+        const dy = obj.y - other.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 50) {
+          obj.dx *= -1;
+          obj.dy *= -1;
+        }
+      }
+    });
+  });
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+  </script>
 </body>
-</html>
+</html
