@@ -1,21 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon Tech Background</title>
   <style>
     body {
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      height: 100vh;
       margin: 0;
-      color: white; /* To make text readable */
+      height: 100vh;
+      background: #0a001a; /* very dark blackish violet */
+      overflow: hidden;
+      font-family: Arial, sans-serif;
     }
+
+    .floating-icon {
+      position: absolute;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: float 20s linear infinite;
+      opacity: 0.4;
+      white-space: nowrap;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(-200vh) rotate(360deg);
+        opacity: 0.8;
+      }
+    }
+
+    /* Neon colors based on logos */
+    .python    { color: #306998; text-shadow: 0 0 8px #306998; }
+    .java      { color: #f89820; text-shadow: 0 0 8px #f89820; }
+    .cpp       { color: #00599C; text-shadow: 0 0 8px #00599C; }
+    .html      { color: #e34c26; text-shadow: 0 0 8px #e34c26; }
+    .css       { color: #264de4; text-shadow: 0 0 8px #264de4; }
+    .js        { color: #f0db4f; text-shadow: 0 0 8px #f0db4f; }
+    .react     { color: #61dafb; text-shadow: 0 0 8px #61dafb; }
+    .node      { color: #68a063; text-shadow: 0 0 8px #68a063; }
+    .next      { color: #ffffff; text-shadow: 0 0 8px #ffffff; }
+    .mongo     { color: #4DB33D; text-shadow: 0 0 8px #4DB33D; }
+    .mysql     { color: #00758f; text-shadow: 0 0 8px #00758f; }
+    .php       { color: #8892BF; text-shadow: 0 0 8px #8892BF; }
+    .typescript{ color: #3178c6; text-shadow: 0 0 8px #3178c6; }
+    .flutter   { color: #02569B; text-shadow: 0 0 8px #02569B; }
+    .firebase  { color: #FFCA28; text-shadow: 0 0 8px #FFCA28; }
   </style>
 </head>
 <body>
-  <h1>Hello, I'm Praduman Narwariya</h1>
-  <p>Welcome to my portfolio website!</p>
+  <!-- Floating Logos/Text -->
+  <div class="floating-icon python"    style="left: 10%;">Python</div>
+  <div class="floating-icon java"      style="left: 20%;">Java</div>
+  <div class="floating-icon cpp"       style="left: 30%;">C++</div>
+  <div class="floating-icon html"      style="left: 40%;">HTML</div>
+  <div class="floating-icon css"       style="left: 50%;">CSS</div>
+  <div class="floating-icon js"        style="left: 60%;">JavaScript</div>
+  <div class="floating-icon react"     style="left: 70%;">React</div>
+  <div class="floating-icon node"      style="left: 80%;">Node.js</div>
+  <div class="floating-icon next"      style="left: 90%;">Next.js</div>
+  <div class="floating-icon mongo"     style="left: 15%;">MongoDB</div>
+  <div class="floating-icon mysql"     style="left: 25%;">MySQL</div>
+  <div class="floating-icon php"       style="left: 35%;">PHP</div>
+  <div class="floating-icon typescript"style="left: 45%;">TypeScript</div>
+  <div class="floating-icon flutter"   style="left: 55%;">Flutter</div>
+  <div class="floating-icon firebase"  style="left: 65%;">Firebase</div>
 </body>
 </html>
