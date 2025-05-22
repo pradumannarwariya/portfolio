@@ -8,7 +8,7 @@
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #03000b;
+      background-color: #03000b; /* Darker background */
     }
     canvas {
       display: block;
@@ -27,86 +27,24 @@
     { name: "Python", color: "#306998", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
     { name: "Java", color: "#f89820", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
     { name: "C++", color: "#00599C", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "C", color: "#A8B9CC", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
     { name: "JavaScript", color: "#f0db4f", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "C#", color: "#178600", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+    { name: "Go", color: "#00ADD8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+    { name: "Rust", color: "#DEA584", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg" },
+    { name: "Swift", color: "#FA7343", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
+    { name: "SQL", color: "#e38c00", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "R", color: "#276DC3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" },
+    { name: "Kotlin", color: "#A97BFF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
     { name: "TypeScript", color: "#3178c6", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { name: "HTML", color: "#e34c26", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-    { name: "CSS", color: "#264de4", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
-    // Add more if desired...
-  ];
-
-  const floatingObjects = [];
-
-  items.forEach(item => {
-    const img = new Image();
-    img.src = item.img;
-    img.onload = () => {
-      floatingObjects.push({
-        ...item,
-        img: img,
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        dx: (Math.random() - 0.5) * 14,
-        dy: (Math.random() - 0.5) * 14
-      });
-    };
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    floatingObjects.forEach(obj => {
-      // Repel from nearby objects
-      floatingObjects.forEach(other => {
-        if (obj !== other) {
-          const dx = obj.x - other.x;
-          const dy = obj.y - other.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            // Move away
-            obj.dx += dx / distance;
-            obj.dy += dy / distance;
-          }
-        }
-      });
-
-      // Normalize speed
-      const speedLimit = 10;
-      const speed = Math.sqrt(obj.dx * obj.dx + obj.dy * obj.dy);
-      if (speed > speedLimit) {
-        obj.dx = (obj.dx / speed) * speedLimit;
-        obj.dy = (obj.dy / speed) * speedLimit;
-      }
-
-      // Glow and draw
-      ctx.save();
-      ctx.globalAlpha = 0.4;
-      ctx.shadowColor = obj.color;
-      ctx.shadowBlur = 40;
-      ctx.drawImage(obj.img, obj.x, obj.y, 80, 80);
-      ctx.font = "26px Arial";
-      ctx.fillStyle = obj.color;
-      ctx.fillText(obj.name, obj.x + 85, obj.y + 50);
-      ctx.restore();
-
-      // Move
-      obj.x += obj.dx;
-      obj.y += obj.dy;
-
-      // Bounce on edges
-      if (obj.x < 0 || obj.x + 80 > canvas.width) obj.dx *= -1;
-      if (obj.y < 0 || obj.y + 80 > canvas.height) obj.dy *= -1;
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
-</body>
-</html>
+    { name: "PHP", color: "#8892BF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+    { name: "Ruby", color: "#CC342D", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg" },
+    { name: "Dart", color: "#0175C2", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+    { name: "Visual Basic", color: "#945db7", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualbasic/visualbasic-original.svg" },
+    { name: "Delphi", color: "#E30000", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/delphi/delphi-original.svg" },
+    { name: "Scala", color: "#DC322F", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" },
+    { name: "MATLAB", color: "#0076A8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" },
+    { name: "Bosque", color: "#00B4AB", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bosque/bosque-original.svg" },
+    { name: "Solidity", color: "#363636", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" },
+    { name: "Objective-C", color: "#438EFF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/objectivec/objectivec-plain.svg" },
+    { name: "Fortran", color: "#734F96",{"tool_responses": [{"tool_name": "sonic", "response": {"navigation_refs": [], "needs_search": false, "bing_query": [{"q": "JavaScript canvas prevent object collision repulsion force example"}, {"q": "JavaScript canvas multiple images moving avoid overlap"}], "image_query": [], "product_query": {"search": ["JavaScript canvas animation with multiple programming language icons"]}, "allow_product_query": false, "allow_image_query": false}}]}11
