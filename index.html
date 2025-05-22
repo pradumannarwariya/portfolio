@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Praduman’s portfolio</title>
+  <title>Programming Languages Background</title>
   <style>
     body {
       margin: 0;
@@ -44,7 +44,63 @@
     { name: "Delphi", color: "#E30000", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/delphi/delphi-original.svg" },
     { name: "Scala", color: "#DC322F", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" },
     { name: "MATLAB", color: "#0076A8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" },
-    { name: "Bosque", color: "#00B4AB", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bosque/bosque-original.svg" },
     { name: "Solidity", color: "#363636", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" },
     { name: "Objective-C", color: "#438EFF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/objectivec/objectivec-plain.svg" },
-    { name: "Fortran", color: "#734F96",{"tool_responses": [{"tool_name": "sonic", "response": {"navigation_refs": [], "needs_search": false, "bing_query": [{"q": "JavaScript canvas prevent object collision repulsion force example"}, {"q": "JavaScript canvas multiple images moving avoid overlap"}], "image_query": [], "product_query": {"search": ["JavaScript canvas animation with multiple programming language icons"]}, "allow_product_query": false, "allow_image_query": false}}]}11
+    { name: "Fortran", color: "#734F96", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg" },
+    { name: "Erlang", color: "#A90533", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/erlang/erlang-original.svg" },
+    { name: "Groovy", color: "#4298b8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/groovy/groovy-original.svg" },
+    { name: "Lua", color: "#000080", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" },
+    { name: "F#", color: "#378BBA", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fsharp/fsharp-original.svg" },
+    { name: "ABAP", color: "#E8274B", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/abap/abap-original.svg" },
+    { name: "Lisp", color: "#3fb68b", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lisp/lisp-original.svg" }
+  ];
+
+  const floatingObjects = [];
+
+  items.forEach(item => {
+    const img = new Image();
+    img.src = item.img;
+    img.onload = () => {
+      floatingObjects.push({
+        name: item.name,
+        color: item.color,
+        img: img,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() - 0.5) * 10, // 7x speed
+        dy: (Math.random() - 0.5) * 10
+      });
+    };
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    floatingObjects.forEach(obj => {
+      ctx.shadowColor = obj.color;
+      ctx.shadowBlur = 25;
+      ctx.globalAlpha = 0.5;
+      ctx.drawImage(obj.img, obj.x, obj.y, 55, 55); // Slightly smaller size for background
+      ctx.globalAlpha = 1;
+      ctx.font = "20px Arial";
+      ctx.fillStyle = obj.color;
+      ctx.fillText(obj.name, obj.x + 60, obj.y + 35);
+
+      obj.x += obj.dx;
+      obj.y += obj.dy;
+
+      // Prevent boundary sticking
+      if (obj.x <= 0 || obj.x + 55 >= canvas.width) obj.dx = -obj.dx;
+      if (obj.y <= 0 || obj.y + 55 >= canvas.height) obj.dy = -obj.dy;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>
