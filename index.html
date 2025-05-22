@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Praduman's portfolio</title>
+  <title>Programming Languages Background</title>
   <style>
     body {
       margin: 0;
@@ -25,7 +25,10 @@
 
   const iconSize = 55;
   const safeMargin = 60;
-  const spacing = 65;
+  const spacing = 70; // space between icons
+  const minDistance = 20;
+  const maxDistance = 30;
+  const speedFactor = 7;
 
   const items = [
     { name: "Python", color: "#306998", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
@@ -87,14 +90,36 @@
         img: img,
         x: x,
         y: y,
-        dx: (Math.random() - 0.5) * 10,
-        dy: (Math.random() - 0.5) * 10
+        dx: (Math.random() - 0.5) * speedFactor,
+        dy: (Math.random() - 0.5) * speedFactor
       });
     };
   });
 
+  function repelIcons() {
+    for (let i = 0; i < floatingObjects.length; i++) {
+      for (let j = i + 1; j < floatingObjects.length; j++) {
+        const a = floatingObjects[i];
+        const b = floatingObjects[j];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < minDistance || dist < spacing) {
+          const angle = Math.atan2(dy, dx);
+          const move = (spacing - dist) * 0.02;
+          a.x -= move * Math.cos(angle);
+          a.y -= move * Math.sin(angle);
+          b.x += move * Math.cos(angle);
+          b.y += move * Math.sin(angle);
+        }
+      }
+    }
+  }
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    repelIcons();
+
     floatingObjects.forEach(obj => {
       ctx.shadowColor = obj.color;
       ctx.shadowBlur = 25;
@@ -111,6 +136,7 @@
       if (obj.x <= 0 || obj.x + iconSize >= canvas.width) obj.dx *= -1;
       if (obj.y <= 0 || obj.y + iconSize >= canvas.height) obj.dy *= -1;
     });
+
     requestAnimationFrame(draw);
   }
 
@@ -122,4 +148,4 @@
   });
 </script>
 </body>
-</html>
+</html
