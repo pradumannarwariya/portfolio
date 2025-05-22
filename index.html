@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Glowing Tech Background</title>
+  <title>Collision Boost Background</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #060012; /* darker background */
+      background-color: #060012;
     }
     canvas {
       display: block;
@@ -24,36 +24,14 @@
   canvas.height = window.innerHeight;
 
   const items = [
-    { name: "Python", color: "#306998", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", desc: "Versatile, easy to learn, widely used in data science and AI." },
-    { name: "Java", color: "#f89820", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", desc: "Robust, platform-independent, used for enterprise apps." },
-    { name: "C++", color: "#00599C", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", desc: "Used in system programming, gaming, and HPC." },
-    { name: "C", color: "#A8B9CC", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", desc: "Low-level systems and embedded development." },
-    { name: "JavaScript", color: "#f0db4f", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", desc: "Core of interactive web development." },
-    { name: "C#", color: "#178600", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg", desc: "For Windows apps and game development." },
-    { name: "Go", color: "#00ADD8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg", desc: "Efficient, used in DevOps and cloud." },
-    { name: "Rust", color: "#DEA584", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg", desc: "Safe systems programming." },
-    { name: "Swift", color: "#FA7343", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg", desc: "For iOS and macOS apps." },
-    { name: "SQL", color: "#003B57", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", desc: "Used to manage databases." },
-    { name: "R", color: "#276DC3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg", desc: "Statistical computing and analysis." },
-    { name: "Kotlin", color: "#7F52FF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg", desc: "Modern Android development." },
-    { name: "TypeScript", color: "#3178c6", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", desc: "Typed JavaScript superset." },
-    { name: "PHP", color: "#8892BF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg", desc: "Backend web development." },
-    { name: "Ruby", color: "#CC342D", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg", desc: "Readable language, used in Rails." },
-    { name: "Dart", color: "#0175C2", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg", desc: "Used in Flutter apps." },
-    { name: "Visual Basic", color: "#9457EB", img: "", desc: "Legacy Windows development." },
-    { name: "Delphi", color: "#C11F3F", img: "", desc: "For Windows GUI apps." },
-    { name: "Scala", color: "#DC322F", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg", desc: "Used in big data." },
-    { name: "MATLAB", color: "#E16737", img: "", desc: "Numerical analysis and computing." },
-    { name: "Bosque", color: "#009688", img: "", desc: "Emerging, possible for quantum." },
-    { name: "Solidity", color: "#363636", img: "", desc: "Ethereum smart contracts." },
-    { name: "Objective-C", color: "#438EFF", img: "", desc: "Older iOS/macOS language." },
-    { name: "Fortran", color: "#734F96", img: "", desc: "Scientific computing." },
-    { name: "Erlang", color: "#B83998", img: "", desc: "Concurrent fault-tolerant apps." },
-    { name: "Groovy", color: "#4298B8", img: "", desc: "Web and enterprise apps." },
-    { name: "Lua", color: "#000080", img: "", desc: "Game scripting." },
-    { name: "F#", color: "#378BBA", img: "", desc: "Data science and finance." },
-    { name: "ABAP", color: "#E9DD00", img: "", desc: "SAP systems." },
-    { name: "Lisp", color: "#3FB68B", img: "", desc: "Symbolic AI computation." }
+    { name: "Python", color: "#306998", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Java", color: "#f89820", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+    { name: "C++", color: "#00599C", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "JavaScript", color: "#f0db4f", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "TypeScript", color: "#3178c6", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { name: "HTML", color: "#e34c26", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS", color: "#264de4", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
+    // Add more if desired...
   ];
 
   const floatingObjects = [];
@@ -67,43 +45,62 @@
         img: img,
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        dx: (Math.random() - 0.5) * 14,  // 7x speed
-        dy: (Math.random() - 0.5) * 14
+        dx: (Math.random() - 0.5) * 14,
+        dy: (Math.random() - 0.5) * 14,
+        boostEndTime: 0
       });
     };
   });
 
   function draw() {
+    const now = Date.now();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     floatingObjects.forEach(obj => {
+      const speedMultiplier = now < obj.boostEndTime ? 10 : 1;
+
+      // Glow and draw
       ctx.save();
-      ctx.globalAlpha = 0.4; // faded glow
+      ctx.globalAlpha = 0.4;
       ctx.shadowColor = obj.color;
       ctx.shadowBlur = 40;
-      ctx.drawImage(obj.img, obj.x, obj.y, 80, 80); // larger icon
+      ctx.drawImage(obj.img, obj.x, obj.y, 80, 80);
       ctx.font = "26px Arial";
       ctx.fillStyle = obj.color;
       ctx.fillText(obj.name, obj.x + 85, obj.y + 50);
       ctx.restore();
 
-      obj.x += obj.dx;
-      obj.y += obj.dy;
+      // Move
+      obj.x += obj.dx * speedMultiplier;
+      obj.y += obj.dy * speedMultiplier;
 
+      // Bounce on edges
       if (obj.x < 0 || obj.x + 80 > canvas.width) obj.dx *= -1;
       if (obj.y < 0 || obj.y + 80 > canvas.height) obj.dy *= -1;
-
-      floatingObjects.forEach(other => {
-        if (other !== obj) {
-          const dx = obj.x - other.x;
-          const dy = obj.y - other.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 90) {
-            obj.dx *= -1;
-            obj.dy *= -1;
-          }
-        }
-      });
     });
+
+    // Handle collisions
+    for (let i = 0; i < floatingObjects.length; i++) {
+      for (let j = i + 1; j < floatingObjects.length; j++) {
+        const a = floatingObjects[i];
+        const b = floatingObjects[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 90) {
+          // Bounce in opposite directions
+          [a.dx, b.dx] = [-a.dx, -b.dx];
+          [a.dy, b.dy] = [-a.dy, -b.dy];
+
+          // Boost speed for 1 sec
+          const boostTime = Date.now() + 1000;
+          a.boostEndTime = boostTime;
+          b.boostEndTime = boostTime;
+        }
+      }
+    }
+
     requestAnimationFrame(draw);
   }
 
