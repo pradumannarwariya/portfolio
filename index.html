@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Collision Boost Background</title>
+  <title>Praduman’s portfolio</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #060012;
+      background-color: #03000b;
     }
     canvas {
       display: block;
@@ -46,18 +46,37 @@
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         dx: (Math.random() - 0.5) * 14,
-        dy: (Math.random() - 0.5) * 14,
-        boostEndTime: 0
+        dy: (Math.random() - 0.5) * 14
       });
     };
   });
 
   function draw() {
-    const now = Date.now();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     floatingObjects.forEach(obj => {
-      const speedMultiplier = now < obj.boostEndTime ? 10 : 1;
+      // Repel from nearby objects
+      floatingObjects.forEach(other => {
+        if (obj !== other) {
+          const dx = obj.x - other.x;
+          const dy = obj.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
+            // Move away
+            obj.dx += dx / distance;
+            obj.dy += dy / distance;
+          }
+        }
+      });
+
+      // Normalize speed
+      const speedLimit = 10;
+      const speed = Math.sqrt(obj.dx * obj.dx + obj.dy * obj.dy);
+      if (speed > speedLimit) {
+        obj.dx = (obj.dx / speed) * speedLimit;
+        obj.dy = (obj.dy / speed) * speedLimit;
+      }
 
       // Glow and draw
       ctx.save();
@@ -71,35 +90,13 @@
       ctx.restore();
 
       // Move
-      obj.x += obj.dx * speedMultiplier;
-      obj.y += obj.dy * speedMultiplier;
+      obj.x += obj.dx;
+      obj.y += obj.dy;
 
       // Bounce on edges
       if (obj.x < 0 || obj.x + 80 > canvas.width) obj.dx *= -1;
       if (obj.y < 0 || obj.y + 80 > canvas.height) obj.dy *= -1;
     });
-
-    // Handle collisions
-    for (let i = 0; i < floatingObjects.length; i++) {
-      for (let j = i + 1; j < floatingObjects.length; j++) {
-        const a = floatingObjects[i];
-        const b = floatingObjects[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 90) {
-          // Bounce in opposite directions
-          [a.dx, b.dx] = [-a.dx, -b.dx];
-          [a.dy, b.dy] = [-a.dy, -b.dy];
-
-          // Boost speed for 1 sec
-          const boostTime = Date.now() + 1000;
-          a.boostEndTime = boostTime;
-          b.boostEndTime = boostTime;
-        }
-      }
-    }
 
     requestAnimationFrame(draw);
   }
