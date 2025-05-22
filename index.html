@@ -104,3 +104,131 @@
 </script>
 </body>
 </html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programming Languages Background</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #03000b;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<script>
+  const canvas = document.getElementById("bgCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const iconSize = 55;
+  const safeMargin = 60;
+  const spacing = 65;
+
+  const items = [
+    { name: "Python", color: "#306998", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Java", color: "#f89820", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+    { name: "C++", color: "#00599C", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "C", color: "#A8B9CC", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+    { name: "JavaScript", color: "#f0db4f", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "C#", color: "#178600", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+    { name: "Go", color: "#00ADD8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+    { name: "Rust", color: "#DEA584", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg" },
+    { name: "Swift", color: "#FA7343", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
+    { name: "SQL", color: "#e38c00", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "R", color: "#276DC3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" },
+    { name: "Kotlin", color: "#A97BFF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+    { name: "TypeScript", color: "#3178c6", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { name: "PHP", color: "#8892BF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+    { name: "Ruby", color: "#CC342D", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg" },
+    { name: "Dart", color: "#0175C2", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+    { name: "Visual Basic", color: "#945db7", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualbasic/visualbasic-original.svg" },
+    { name: "Delphi", color: "#E30000", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/delphi/delphi-original.svg" },
+    { name: "Scala", color: "#DC322F", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" },
+    { name: "MATLAB", color: "#0076A8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" },
+    { name: "Solidity", color: "#363636", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" },
+    { name: "Objective-C", color: "#438EFF", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/objectivec/objectivec-plain.svg" },
+    { name: "Fortran", color: "#734F96", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg" },
+    { name: "Erlang", color: "#A90533", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/erlang/erlang-original.svg" },
+    { name: "Groovy", color: "#4298b8", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/groovy/groovy-original.svg" },
+    { name: "Lua", color: "#000080", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" },
+    { name: "F#", color: "#378BBA", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fsharp/fsharp-original.svg" },
+    { name: "ABAP", color: "#E8274B", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/abap/abap-original.svg" },
+    { name: "Lisp", color: "#3fb68b", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lisp/lisp-original.svg" }
+  ];
+
+  const floatingObjects = [];
+
+  function isOverlapping(x, y) {
+    return floatingObjects.some(obj => {
+      const dx = obj.x - x;
+      const dy = obj.y - y;
+      return Math.sqrt(dx * dx + dy * dy) < spacing;
+    });
+  }
+
+  items.forEach(item => {
+    const img = new Image();
+    img.src = item.img;
+    img.onload = () => {
+      let x, y;
+      let tries = 0;
+      do {
+        x = Math.random() * (canvas.width - safeMargin * 2 - iconSize) + safeMargin;
+        y = Math.random() * (canvas.height - safeMargin * 2 - iconSize) + safeMargin;
+        tries++;
+      } while (isOverlapping(x, y) && tries < 100);
+
+      floatingObjects.push({
+        name: item.name,
+        color: item.color,
+        img: img,
+        x: x,
+        y: y,
+        dx: (Math.random() - 0.5) * 10,
+        dy: (Math.random() - 0.5) * 10
+      });
+    };
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    floatingObjects.forEach(obj => {
+      ctx.shadowColor = obj.color;
+      ctx.shadowBlur = 25;
+      ctx.globalAlpha = 0.5;
+      ctx.drawImage(obj.img, obj.x, obj.y, iconSize, iconSize);
+      ctx.globalAlpha = 1;
+      ctx.font = "20px Arial";
+      ctx.fillStyle = obj.color;
+      ctx.fillText(obj.name, obj.x + iconSize + 5, obj.y + 35);
+
+      obj.x += obj.dx;
+      obj.y += obj.dy;
+
+      if (obj.x <= 0 || obj.x + iconSize >= canvas.width) obj.dx *= -1;
+      if (obj.y <= 0 || obj.y + iconSize >= canvas.height) obj.dy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>
