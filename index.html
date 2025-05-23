@@ -2,25 +2,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>praduman Narwariya’s Portfolio</title>
+  <title>Praduman Narwariya’s Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    :root {
-      --bg: #0d0b1f;
-      --text: #ffffff;
-      --card-grad: linear-gradient(145deg, #1e2454, #2f084b);
-      --hover-glow: #a463f2;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: #0d0b1f;
+      color: #fff;
       line-height: 1.6;
-      padding: 1rem;
-      transition: all 0.3s ease;
     }
     header {
       display: flex;
@@ -39,8 +36,8 @@
     }
     .hero {
       text-align: center;
-      padding: 4rem 2rem;
-      background: radial-gradient(circle, #2b1f4e, var(--bg));
+      padding: 4rem 2rem 8rem;
+      background: radial-gradient(circle, #2b1f4e, #0d0b1f);
     }
     .hero img {
       width: 100px;
@@ -54,116 +51,108 @@
     .highlight {
       color: #9b59b6;
     }
-    .section {
-      margin: 3rem 0;
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 1rem;
     }
     .carousel {
       display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 1rem;
-      padding: 1rem;
-      animation: slide 20s linear infinite;
+      transition: transform 0.5s ease-in-out;
     }
     .card {
-      flex: 0 0 280px;
-      scroll-snap-align: center;
-      background: var(--card-grad);
+      flex: 0 0 240px;
+      margin-right: 2rem;
+      height: 200px;
+      background: linear-gradient(145deg, #1a237e, #4a148c);
       border-radius: 1rem;
+      color: white;
       padding: 1.5rem;
-      text-align: center;
-      box-shadow: inset 0 0 10px #aaa, 0 0 30px rgba(0,0,0,0.5);
+      box-shadow: 0 0 20px rgba(186, 104, 200, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      text-align: center;
     }
     .card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 40px var(--hover-glow), inset 0 0 15px #6c0fcd;
-    }
-    .card h4 {
-      margin: 1rem 0 0.5rem;
-      font-weight: 600;
+      box-shadow: 0 0 40px rgba(186, 104, 200, 1), inset 0 0 20px rgba(255, 255, 255, 0.15);
     }
     .card i {
       font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: #d1bfff;
-    }
-    .projects img {
-      width: 100%;
-      border-radius: 0.5rem;
-    }
-    .contact {
-      background-color: #1a1831;
-      padding: 2rem;
-      border-radius: 1rem;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-    input, textarea {
       margin-bottom: 1rem;
-      padding: 0.75rem;
+      display: block;
+      color: #bb86fc;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.3);
       border: none;
-      border-radius: 0.5rem;
-    }
-    button {
-      padding: 0.75rem;
-      background-color: #9b59b6;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      margin-top: 2rem;
-      color: #777;
-    }
-    .toggle-theme {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #333;
       color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
       padding: 0.5rem 1rem;
-      border-radius: 1rem;
+      z-index: 1;
+    }
+    .nav-btn.left { left: 0; }
+    .nav-btn.right { right: 0; }
+    .dot-container {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .dot {
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
       cursor: pointer;
     }
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+    .dot.active {
+      background-color: #fff;
     }
   </style>
 </head>
 <body>
-  <div class="toggle-theme" onclick="toggleTheme()">Toggle Theme</div>  <header>
+  <header>
     <h1>&#8987;</h1>
     <nav>
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Labs</a>
     </nav>
-  </header>  <section class="hero">
+  </header>
+  <section class="hero">
     <img src="https://i.pravatar.cc/100" alt="avatar">
     <p>Hello! I’m <span class="highlight">Praduman Narwariya</span></p>
     <h2>hi! I'm a <span class="highlight">Web Developer</span> who creates <span class="highlight">Dynamic website and web apps</span></h2>
     <p>I'm a student | Developer | Problem Solver</p>
-  </section>  <section class="section">
-    <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:1rem;">Skill Set</h3>
-    <div class="carousel">
-      <div class="card"><i class="fas fa-code"></i><h4>Core Front-End</h4><p>Animations & Transitions</p></div>
-      <div class="card"><i class="fab fa-react"></i><h4>Front-End Frameworks</h4><p>React.js / Vue.js / Angular</p></div>
-      <div class="card"><i class="fas fa-cloud-upload-alt"></i><h4>Deployment & Hosting</h4><p>Render / Railway / Heroku</p></div>
-      <div class="card"><i class="fas fa-project-diagram"></i><h4>API Skills</h4><p>GraphQL, REST</p></div>
-      <div class="card"><i class="fas fa-tools"></i><h4>Dev Tools</h4><p>VS Code, Webpack</p></div>
-      <div class="card"><i class="fab fa-node-js"></i><h4>Back-End</h4><p>Node.js with Express</p></div>
-      <div class="card"><i class="fas fa-database"></i><h4>Databases</h4><p>PostgreSQL, MySQL</p></div>
-      <div class="card"><i class="fab fa-github"></i><h4>Version Control</h4><p>Git & GitHub</p></div>
-      <div class="card"><i class="fas fa-code-branch"></i><h4>Languages</h4><p>HTML5 / CSS3 / JS / Python</p></div>
+  </section>
+  <section class="section">
+    <h3 class="section-title">Skill Set</h3>
+    <div class="carousel-wrapper">
+      <button class="nav-btn left" onclick="moveCarousel(-1)">&#10094;</button>
+      <div class="carousel" id="carousel">
+        <div class="card"><i class="fas fa-code"></i><h4>Front-End</h4><p>HTML, CSS, JS</p></div>
+        <div class="card"><i class="fab fa-react"></i><h4>React.js</h4><p>Component-based UI</p></div>
+        <div class="card"><i class="fas fa-server"></i><h4>Back-End</h4><p>Node.js & Express</p></div>
+        <div class="card"><i class="fas fa-database"></i><h4>Database</h4><p>SQL & MongoDB</p></div>
+        <div class="card"><i class="fas fa-cloud-upload-alt"></i><h4>Deployment</h4><p>Render, Railway</p></div>
+        <div class="card"><i class="fas fa-code-branch"></i><h4>Git & GitHub</h4><p>Version Control</p></div>
+      </div>
+      <button class="nav-btn right" onclick="moveCarousel(1)">&#10095;</button>
+      <div class="dot-container" id="dots"></div>
     </div>
-  </section>  <section class="section">
-    <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:1rem;">Example Projects</h3>
+  </section>
+  <section class="section">
+    <h3 class="section-title">Example Projects</h3>
     <div class="cards projects">
       <div class="card">
         <img src="https://via.placeholder.com/300x200" alt="Project">
@@ -176,7 +165,8 @@
         <p>A tool for automated documentation generation.</p>
       </div>
     </div>
-  </section>  <section class="section contact">
+  </section>
+  <section class="section contact">
     <h3 style="font-size: 1.5rem; margin-bottom:1rem;">Contact</h3>
     <form>
       <input type="text" placeholder="Name" required />
@@ -184,22 +174,44 @@
       <textarea rows="4" placeholder="Message"></textarea>
       <button type="submit">Submit</button>
     </form>
-  </section>  <footer>
+  </section>
+  <footer>
     <p>&copy; 2025 PRADUMAN NARWARIYA. All rights reserved.</p>
-  </footer>  <script>
-    function toggleTheme() {
-      const root = document.documentElement;
-      if (root.style.getPropertyValue('--bg') === '#0d0b1f') {
-        root.style.setProperty('--bg', '#ffffff');
-        root.style.setProperty('--text', '#000000');
-        root.style.setProperty('--card-grad', 'linear-gradient(145deg, #dee2ec, #b0b3be)');
-        root.style.setProperty('--hover-glow', '#ff8c00');
-      } else {
-        root.style.setProperty('--bg', '#0d0b1f');
-        root.style.setProperty('--text', '#ffffff');
-        root.style.setProperty('--card-grad', 'linear-gradient(145deg, #1e2454, #2f084b)');
-        root.style.setProperty('--hover-glow', '#a463f2');
-      }
-    }
-  </script></body>
-</html>
+  </footer>
+  <script>
+    const carousel = document.getElementById("carousel");
+    const cards = document.querySelectorAll(".card");
+    const dotsContainer = document.getElementById("dots");
+    let index = 0;function updateCarousel() {
+  carousel.style.transform = `translateX(-${index * (cards[0].offsetWidth + 32)}px)`;
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+function moveCarousel(direction) {
+  index += direction;
+  if (index >= cards.length) index = 0;
+  if (index < 0) index = cards.length - 1;
+  updateCarousel();
+}
+
+// dots
+cards.forEach((_, i) => {
+  const dot = document.createElement("span");
+  dot.classList.add("dot");
+  dot.addEventListener("click", () => {
+    index = i;
+    updateCarousel();
+  });
+  dotsContainer.appendChild(dot);
+});
+updateCarousel();
+
+let interval = setInterval(() => moveCarousel(1), 3000);
+carousel.parentElement.addEventListener('mouseover', () => clearInterval(interval));
+carousel.parentElement.addEventListener('mouseleave', () => interval = setInterval(() => moveCarousel(1), 3000));
+
+  </script>
+</body>
+  </html
