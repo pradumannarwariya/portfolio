@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #0d0b1f;
+      color: #fff;
+      line-height: 1.6;
+      padding: 1rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1a1831;
+    }
+    header h1 {
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: #bbb;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: radial-gradient(circle, #2b1f4e, #0d0b1f);
+    }
+    .hero img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin: 1rem 0;
+    }
+    .highlight {
+      color: #9b59b6;
+    }
+    .section {
+      margin: 3rem 0;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+    .card {
+      background: linear-gradient(145deg, #292547, #1f1b38);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(155, 89, 182, 0.2);
+    }
+    .card h4 {
+      margin: 1rem 0 0.5rem;
+      font-weight: 600;
+    }
+    .projects img {
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+    .contact {
+      background-color: #1a1831;
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input, textarea {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+    }
+    button {
+      padding: 0.75rem;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>&#8987;</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Labs</a>
+    </nav>
+  </header>  <section class="hero">
+    <img src="https://i.pravatar.cc/100" alt="avatar">
+    <p>Hello! I’m <span class="highlight">[Your Name]</span></p>
+    <h2>A designer who <span class="highlight">judges a book</span> by its <span class="highlight">cover</span></h2>
+    <p>I'm a Software Engineer | UI/UX Designer | Problem Solver</p>
+  </section>  <section class="section">
+    <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:1rem;">Work Experience</h3>
+    <div class="cards">
+      <div class="card"><h4>CIB on the Mobile</h4><p>UI/UX Design</p></div>
+      <div class="card"><h4>CIB on the Mobile</h4><p>Frontend Dev</p></div>
+      <div class="card"><h4>CIB on the Mobile</h4><p>App Architecture</p></div>
+      <div class="card"><h4>CIB on the Mobile</h4><p>Testing</p></div>
+    </div>
+  </section>  <section class="section">
+    <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:1rem;">Example Projects</h3>
+    <div class="cards projects">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Project">
+        <h4>Example Project</h4>
+        <p>A web app for evaluating something useful.</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Project">
+        <h4>Example Project</h4>
+        <p>A tool for automated documentation generation.</p>
+      </div>
+    </div>
+  </section>  <section class="section contact">
+    <h3 style="font-size: 1.5rem; margin-bottom:1rem;">Contact</h3>
+    <form>
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <textarea rows="4" placeholder="Message"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>  <footer>
+    <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+  </footer>
+</body>
+</html
