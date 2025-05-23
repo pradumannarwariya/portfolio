@@ -29,25 +29,87 @@
     header h1 {
       font-size: 1.5rem;
     }
-    nav a {
-      color: #bbb;
-      margin-left: 1rem;
-      text-decoration: none;
-    }
-    .hero {
-      text-align: center;
-      padding: 4rem 2rem 8rem;
-      background: radial-gradient(circle, #2b1f4e, #0d0b1f);
-    }
-    .hero img {
-      width: 100px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-    .hero h2 {
-      font-size: 2rem;
-      margin: 1rem 0;
-    }
+.hero {
+  padding: 4rem 1rem;
+  background: radial-gradient(circle, #2b1f4e, #0d0b1f);
+  text-align: center;
+}
+
+.hero-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.hero-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.hero-nav i {
+  margin-left: 0.5rem;
+}
+
+.hero-img-glow {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  padding: 5px;
+  background: radial-gradient(circle, #bb86fc33, #3700b333);
+  box-shadow: 0 0 25px #bb86fc, 0 0 50px #6200ea;
+}
+.hero-img-glow img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.hero-heading {
+  font-size: 2rem;
+  text-shadow: 2px 2px 8px #000;
+  margin-bottom: 0.5rem;
+}
+
+.hero h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-para {
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.hero-button {
+  background: #9b59b6;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.hero-button:hover {
+  background: #bb86fc;
+}
+
+.hero-tags {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.hero-tags span {
+  background: #1a1831;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid #444;
+  color: #bbb;
+}
     .highlight {
       color: #9b59b6;
     }
@@ -176,10 +238,27 @@
     </nav>
   </header>
   <section class="hero">
-    <img src="https://i.pravatar.cc/100" alt="avatar">
-    <p>Hello! I’m <span class="highlight">Praduman Narwariya</span></p>
-    <h2>hi! I'm a <span class="highlight">Web Developer</span> who creates <span class="highlight">Dynamic website and web apps</span></h2>
-    <p>I'm a student | Developer | Problem Solver</p>
+  <nav class="hero-nav">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Labs</a>
+    <a href="#">Projects</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+  </nav>
+  <div class="hero-content">
+    <div class="hero-img-glow">
+      <img src="https://i.pravatar.cc/100" alt="avatar">
+    </div>
+    <h1 class="hero-heading">Hello! guys</h1>
+    <h2>I am a <span class="highlight">Web Developer</span></h2>
+    <p class="hero-para">I love building dynamic and engaging user experiences on the web.</p>
+    <button class="hero-button">View my work</button>
+    <div class="hero-tags">
+      <span>I'm a student</span>
+      <span>Developer</span>
+      <span>Problem Solver</span>
+    </div>
+  </div>
   </section>
   <section class="section">
     <h3 class="section-title">Skill Set</h3>
@@ -191,10 +270,6 @@
         <div class="card"><i class="fas fa-database"></i><h4>Database</h4><p>SQL & MongoDB</p></div>
         <div class="card"><i class="fas fa-cloud-upload-alt"></i><h4>Deployment</h4><p>Render, Railway</p></div>
         <div class="card"><i class="fas fa-code-branch"></i><h4>Git & GitHub</h4><p>Version Control</p></div>
-      </div>
-      <div class="carousel-controls">
-        <button onclick="moveCarousel(-1)">&#10094;</button>
-        <button onclick="moveCarousel(1)">&#10095;</button>
       </div>
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
