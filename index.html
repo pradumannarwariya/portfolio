@@ -66,15 +66,16 @@
       transition: transform 0.5s ease-in-out;
     }
     .card {
-      flex: 0 0 240px;
-      margin-right: 2rem;
+      flex: 0 0 auto;
+      width: 240px;
+      margin: 0 1rem;
       height: 200px;
       background: linear-gradient(145deg, #1a237e, #4a148c);
       border-radius: 1rem;
       color: white;
       padding: 1.5rem;
       box-shadow: 0 0 20px rgba(186, 104, 200, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s;
       position: relative;
       text-align: center;
     }
@@ -82,41 +83,86 @@
       transform: scale(1.05);
       box-shadow: 0 0 40px rgba(186, 104, 200, 1), inset 0 0 20px rgba(255, 255, 255, 0.15);
     }
+    .card:hover ~ .card,
+    .card:hover ~ .card ~ .card,
+    .card:hover ~ .card ~ .card ~ .card {
+      opacity: 0.5;
+    }
     .card i {
       font-size: 2rem;
       margin-bottom: 1rem;
       display: block;
       color: #bb86fc;
     }
-    .nav-btn {
+    .carousel-controls {
       position: absolute;
       top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
       transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.3);
+    }
+    .carousel-controls button {
+      background: rgba(0, 0, 0, 0.5);
       border: none;
-      color: #fff;
+      color: white;
       font-size: 2rem;
       cursor: pointer;
       padding: 0.5rem 1rem;
-      z-index: 1;
     }
-    .nav-btn.left { left: 0; }
-    .nav-btn.right { right: 0; }
-    .dot-container {
-      text-align: center;
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
       margin-top: 1rem;
     }
-    .dot {
-      height: 10px;
-      width: 10px;
-      margin: 0 5px;
-      background-color: #bbb;
-      border-radius: 50%;
+    .carousel-dots span {
       display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #aaa;
+      border-radius: 50%;
+      margin: 0 5px;
       cursor: pointer;
     }
-    .dot.active {
-      background-color: #fff;
+    .carousel-dots .active {
+      background: #fff;
+    }
+    @media (max-width: 768px) {
+      .card {
+        width: 180px;
+      }
+    }
+    .projects img {
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+    .contact {
+      background-color: #1a1831;
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input, textarea {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+    }
+    button {
+      padding: 0.75rem;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #777;
     }
   </style>
 </head>
@@ -137,8 +183,7 @@
   </section>
   <section class="section">
     <h3 class="section-title">Skill Set</h3>
-    <div class="carousel-wrapper">
-      <button class="nav-btn left" onclick="moveCarousel(-1)">&#10094;</button>
+    <div class="carousel-wrapper" id="carousel-wrapper">
       <div class="carousel" id="carousel">
         <div class="card"><i class="fas fa-code"></i><h4>Front-End</h4><p>HTML, CSS, JS</p></div>
         <div class="card"><i class="fab fa-react"></i><h4>React.js</h4><p>Component-based UI</p></div>
@@ -147,8 +192,11 @@
         <div class="card"><i class="fas fa-cloud-upload-alt"></i><h4>Deployment</h4><p>Render, Railway</p></div>
         <div class="card"><i class="fas fa-code-branch"></i><h4>Git & GitHub</h4><p>Version Control</p></div>
       </div>
-      <button class="nav-btn right" onclick="moveCarousel(1)">&#10095;</button>
-      <div class="dot-container" id="dots"></div>
+      <div class="carousel-controls">
+        <button onclick="moveCarousel(-1)">&#10094;</button>
+        <button onclick="moveCarousel(1)">&#10095;</button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </section>
   <section class="section">
@@ -177,41 +225,58 @@
   </section>
   <footer>
     <p>&copy; 2025 PRADUMAN NARWARIYA. All rights reserved.</p>
-  </footer>
-  <script>
-    const carousel = document.getElementById("carousel");
-    const cards = document.querySelectorAll(".card");
-    const dotsContainer = document.getElementById("dots");
-    let index = 0;function updateCarousel() {
-  carousel.style.transform = `translateX(-${index * (cards[0].offsetWidth + 32)}px)`;
-  document.querySelectorAll('.dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
-  });
-}
+  </footer>  <script>
+    let carousel = document.getElementById("carousel");
+    let cards = document.querySelectorAll(".carousel .card");
+    let currentIndex = 0;
+    let interval = setInterval(() => moveCarousel(1), 3000);
+    let startX = 0;
 
-function moveCarousel(direction) {
-  index += direction;
-  if (index >= cards.length) index = 0;
-  if (index < 0) index = cards.length - 1;
-  updateCarousel();
-}
+    function moveCarousel(step) {
+      currentIndex = (currentIndex + step + cards.length) % cards.length;
+      updateCarousel();
+    }
 
-// dots
-cards.forEach((_, i) => {
-  const dot = document.createElement("span");
-  dot.classList.add("dot");
-  dot.addEventListener("click", () => {
-    index = i;
-    updateCarousel();
-  });
-  dotsContainer.appendChild(dot);
-});
-updateCarousel();
+    function updateCarousel() {
+      let offset = -cards[currentIndex].offsetLeft + (document.querySelector(".carousel-wrapper").offsetWidth - cards[currentIndex].offsetWidth) / 2;
+      carousel.style.transform = `translateX(${offset}px)`;
+      updateDots();
+    }
 
-let interval = setInterval(() => moveCarousel(1), 3000);
-carousel.parentElement.addEventListener('mouseover', () => clearInterval(interval));
-carousel.parentElement.addEventListener('mouseleave', () => interval = setInterval(() => moveCarousel(1), 3000));
+    function updateDots() {
+      let dots = document.querySelectorAll(".carousel-dots span");
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === currentIndex);
+      });
+    }
 
-  </script>
-</body>
-  </html
+    function initDots() {
+      let dotContainer = document.getElementById("carousel-dots");
+      cards.forEach((_, idx) => {
+        let dot = document.createElement("span");
+        dot.onclick = () => {
+          currentIndex = idx;
+          updateCarousel();
+        };
+        dotContainer.appendChild(dot);
+      });
+      updateDots();
+    }
+
+    document.getElementById("carousel-wrapper").addEventListener("mouseover", () => clearInterval(interval));
+    document.getElementById("carousel-wrapper").addEventListener("mouseout", () => interval = setInterval(() => moveCarousel(1), 3000));
+
+    // Swipe Gesture Support
+    document.getElementById("carousel-wrapper").addEventListener("touchstart", e => startX = e.touches[0].clientX);
+    document.getElementById("carousel-wrapper").addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (endX - startX > 50) moveCarousel(-1);
+      else if (startX - endX > 50) moveCarousel(1);
+    });
+
+    window.onload = () => {
+      initDots();
+      updateCarousel();
+    }
+  </script></body>
+          </html
