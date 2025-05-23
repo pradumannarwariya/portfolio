@@ -237,7 +237,11 @@
       <a href="#">Labs</a>
     </nav>
   </header>
-  <section class="hero">
+  <!-- Particle Background -->
+<div id="tsparticles"></div>
+
+<!-- Hero Section -->
+<section class="hero">
   <nav class="hero-nav">
     <a href="#">Home</a>
     <a href="#">About</a>
@@ -259,7 +263,49 @@
       <span>Problem Solver</span>
     </div>
   </div>
-  </section>
+</section>
+
+<!-- tsParticles Script -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+<script>
+tsParticles.load("tsparticles", {
+  fullScreen: { enable: true, zIndex: -1 },
+  particles: {
+    number: { value: 80 },
+    color: { value: "#bb86fc" },
+    shape: { type: "circle" },
+    opacity: { value: 0.6 },
+    size: { value: { min: 1, max: 5 } },
+    move: {
+      enable: true,
+      speed: 2,
+      direction: "none",
+      outModes: { default: "bounce" }
+    },
+    links: {
+      enable: true,
+      distance: 120,
+      color: "#bb86fc",
+      opacity: 0.4,
+      width: 1
+    }
+  },
+  interactivity: {
+    events: {
+      onHover: { enable: true, mode: "repulse" },
+      onClick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      repulse: { distance: 100 },
+      push: { quantity: 4 }
+    }
+  },
+  background: {
+    color: "#0d0b1f"
+  }
+});
+</script>
   
 
 
