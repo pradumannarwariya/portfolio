@@ -6,18 +6,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #0d0b1f;
+      --text: #ffffff;
+      --card-grad: linear-gradient(145deg, #1e2454, #2f084b);
+      --hover-glow: #a463f2;
     }
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: #0d0b1f;
-      color: #fff;
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       padding: 1rem;
+      transition: all 0.3s ease;
     }
     header {
       display: flex;
@@ -37,7 +40,7 @@
     .hero {
       text-align: center;
       padding: 4rem 2rem;
-      background: radial-gradient(circle, #2b1f4e, #0d0b1f);
+      background: radial-gradient(circle, #2b1f4e, var(--bg));
     }
     .hero img {
       width: 100px;
@@ -54,22 +57,36 @@
     .section {
       margin: 3rem 0;
     }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1rem;
       padding: 1rem;
+      animation: slide 20s linear infinite;
     }
     .card {
-      background: linear-gradient(145deg, #292547, #1f1b38);
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+      background: var(--card-grad);
       border-radius: 1rem;
       padding: 1.5rem;
       text-align: center;
-      box-shadow: 0 0 20px rgba(155, 89, 182, 0.2);
+      box-shadow: inset 0 0 10px #aaa, 0 0 30px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px var(--hover-glow), inset 0 0 15px #6c0fcd;
     }
     .card h4 {
       margin: 1rem 0 0.5rem;
       font-weight: 600;
+    }
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #d1bfff;
     }
     .projects img {
       width: 100%;
@@ -103,10 +120,24 @@
       margin-top: 2rem;
       color: #777;
     }
+    .toggle-theme {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #333;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
   </style>
 </head>
 <body>
-  <header>
+  <div class="toggle-theme" onclick="toggleTheme()">Toggle Theme</div>  <header>
     <h1>&#8987;</h1>
     <nav>
       <a href="#">Home</a>
@@ -120,16 +151,16 @@
     <p>I'm a student | Developer | Problem Solver</p>
   </section>  <section class="section">
     <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:1rem;">Skill Set</h3>
-    <div class="cards">
-      <div class="card"><h4>Core Front-End Skills</h4><p>Animations & Transitions</p></div>
-      <div class="card"><h4>Front-End Frameworks/Libraries</h4><p>React.js (or alternatives like Vue.js or Angular)</p></div>
-      <div class="card"><h4>Deployment & Hosting</h4><p>Render / Railway / Heroku – Full stack hosting</p></div>
-      <div class="card"><h4>API Skills</h4><p>GraphQL – Optional but trending</p></div>
-      <div class="card"><h4>Dev Tools & Workflow</h4><p>VS Code – Most popular code editor</p></div>
-      <div class="card"><h4>Core Back-End Skills</h4><p>Node.js with Express.js</p></div>
-      <div class="card"><h4>Database knowledge</h4></h4><p>PostgreSQL or MySQL (SQL)</p></div>
-      <div class="card"><h4>Version Control & Collaboration</h4><p>Git & GitHub – Branching, PRs, collaboration</p></div>
-      <div class="card"><h4>Main language</h4><p>HTML5/JavaScript (ES6+)/CSS3/python</p></div>
+    <div class="carousel">
+      <div class="card"><i class="fas fa-code"></i><h4>Core Front-End</h4><p>Animations & Transitions</p></div>
+      <div class="card"><i class="fab fa-react"></i><h4>Front-End Frameworks</h4><p>React.js / Vue.js / Angular</p></div>
+      <div class="card"><i class="fas fa-cloud-upload-alt"></i><h4>Deployment & Hosting</h4><p>Render / Railway / Heroku</p></div>
+      <div class="card"><i class="fas fa-project-diagram"></i><h4>API Skills</h4><p>GraphQL, REST</p></div>
+      <div class="card"><i class="fas fa-tools"></i><h4>Dev Tools</h4><p>VS Code, Webpack</p></div>
+      <div class="card"><i class="fab fa-node-js"></i><h4>Back-End</h4><p>Node.js with Express</p></div>
+      <div class="card"><i class="fas fa-database"></i><h4>Databases</h4><p>PostgreSQL, MySQL</p></div>
+      <div class="card"><i class="fab fa-github"></i><h4>Version Control</h4><p>Git & GitHub</p></div>
+      <div class="card"><i class="fas fa-code-branch"></i><h4>Languages</h4><p>HTML5 / CSS3 / JS / Python</p></div>
     </div>
   </section>  <section class="section">
     <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:1rem;">Example Projects</h3>
@@ -155,6 +186,20 @@
     </form>
   </section>  <footer>
     <p>&copy; 2025 PRADUMAN NARWARIYA. All rights reserved.</p>
-  </footer>
-</body>
-</html
+  </footer>  <script>
+    function toggleTheme() {
+      const root = document.documentElement;
+      if (root.style.getPropertyValue('--bg') === '#0d0b1f') {
+        root.style.setProperty('--bg', '#ffffff');
+        root.style.setProperty('--text', '#000000');
+        root.style.setProperty('--card-grad', 'linear-gradient(145deg, #dee2ec, #b0b3be)');
+        root.style.setProperty('--hover-glow', '#ff8c00');
+      } else {
+        root.style.setProperty('--bg', '#0d0b1f');
+        root.style.setProperty('--text', '#ffffff');
+        root.style.setProperty('--card-grad', 'linear-gradient(145deg, #1e2454, #2f084b)');
+        root.style.setProperty('--hover-glow', '#a463f2');
+      }
+    }
+  </script></body>
+</html>
