@@ -1,4 +1,3 @@
-<script>
     let carousel = document.getElementById("carousel");
     let cards = document.querySelectorAll(".carousel .card");
     let currentIndex = 0;
@@ -51,9 +50,9 @@
       initDots();
       updateCarousel();
     }
-  </script>
+  
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <script>
+  
   var typed = new Typed('.typed-text', {
     strings: ["Web Developer", "Problem Solver", "Tech Enthusiast"],
     typeSpeed: 60,
@@ -61,14 +60,13 @@
     backDelay: 1500,
     loop: true
   });
-  </script>
-  <script>
+  
   const video = document.getElementById('heroVideo');
   video.playbackRate = 0.3; // slow down to 10% speed
-  </script>
+  
 
 
-<script>
+
     tsParticles.load("tsparticles", {
       fullScreen: { enable: true, zIndex: -1 },
       particles: {
@@ -106,4 +104,4 @@
         color: "#0d0b1f"
       }
     });
-  </script>
+</
