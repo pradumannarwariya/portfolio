@@ -68,7 +68,15 @@
   object-fit: cover;
   z-index: -1;
   opacity: 0.1; /* sets transparency */
-    }
+  animation: fadeInVideo 2s ease-in forwards;
+}
+
+@keyframes fadeInVideo {
+  to {
+    opacity: 0.1; /* or your desired final opacity */
+  }
+}
+    
   
 .hero-nav {
       display: flex;
@@ -313,7 +321,7 @@
       <a href="#">Projects</a>
       <a href="#"><i class="fas fa-cog"></i> Settings</a>
     </nav>
-<video autoplay muted loop playsinline id="heroVideo" class="hero-video">
+<video autoplay muted playsinline id="heroVideo" class="hero-video">
   <source src="wordcloud.mp4" type="video/mp4">
 </video>
     
