@@ -66,4 +66,44 @@
   const video = document.getElementById('heroVideo');
   video.playbackRate = 0.3; // slow down to 10% speed
   </script>
- 
+
+
+<script>
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: true, zIndex: -1 },
+      particles: {
+        number: { value: 80 },
+        color: { value: "#bb86fc" },
+        shape: { type: "circle" },
+        opacity: { value: 0.6 },
+        size: { value: { min: 1, max: 5 } },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          outModes: { default: "bounce" }
+        },
+        links: {
+          enable: true,
+          distance: 120,
+          color: "#bb86fc",
+          opacity: 0.4,
+          width: 1
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { quantity: 4 }
+        }
+      },
+      background: {
+        color: "#0d0b1f"
+      }
+    });
+  </script>
