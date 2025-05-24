@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praduman Narwariya’s Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #0d0b1f; 
+      color: #fff; 
+      line-height: 1.6;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1a1831; 
+    }
+    header h1 {
+      font-size: 1.5rem;
+    }
+    .hero {
+  padding: 4rem 1rem;
+  background: linear-gradient(45deg, #2b1f4e, #0d0b1f, #3700b3);
+  background-size: 300% 100%;
+  animation: gradientShift 4s infinite alternate;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  perspective: 1000px; /* Increased perspective for better 3D effect */
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+    .hero-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero-nav i {
+      margin-left: 0.5rem;
+    }
+
+    .hero-img-glow {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      padding: 5px;
+      background: radial-gradient(circle, #bb86fc33, #3700b333); /* Glowing circle background */
+      box-shadow: 0 0 25px #bb86fc, 0 0 50px #6200ea; /* Glowing effect */
+    }
+    .hero-img-glow img {
+      width: 100%;
+      border-radius: 50%;
+    }
+
+    .hero-heading {
+      font-size: 2rem;
+      text-shadow: 2px 2px 8px #000;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-para {
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .hero-button {
+      background: #9b59b6; /* Purple button */
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 1rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero-button:hover {
+      background: #bb86fc; /* Lighter purple on hover */
+    }
+
+    .hero-tags {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .hero-tags span {
+      background: #1a1831; /* Dark tag background */
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid #444; /* Dark border */
+      color: #bbb;
+    }
+    .highlight {
+      color: #9b59b6; /* Highlight color (purple) */
+    }
+    /* General Section Styling */
+    .section {
+      padding: 2rem 1rem;
+      text-align: center; /* Default text alignment for sections */
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    /* Skills Carousel */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 1rem;
+    }
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .card {
+      flex: 0 0 auto;
+      width: 240px;
+      margin: 0 1rem;
+      height: 200px;
+      background: linear-gradient(145deg, #1a237e, #4a148c); /* Gradient card background */
+      border-radius: 1rem;
+      color: white;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px rgba(186, 104, 200, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.1); /* Card shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s;
+      position: relative;
+      text-align: center;
+    }
+    .card:hover {
+      transform: scale(1.05); /* Slight scale up on hover */
+      box-shadow: 0 0 40px rgba(186, 104, 200, 1), inset 0 0 20px rgba(255, 255, 255, 0.15); /* Stronger shadow on hover */
+    }
+    .card:hover ~ .card,
+    .card:hover ~ .card ~ .card,
+    .card:hover ~ .card ~ .card ~ .card {
+      opacity: 0.5; /* Fade out siblings on hover */
+    }
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+      color: #bb86fc; /* Icon color */
+    }
+    .carousel-controls {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .carousel-controls button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .carousel-dots span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #aaa;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+    .carousel-dots .active {
+      background: #fff;
+    }
+    @media (max-width: 768px) {
+      .card {
+        width: 180px;
+      }
+    }
+    /* Projects Section */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 1rem;
+    }
+    .projects .card {
+      text-align: left;
+      height: auto;
+    }
+    .projects img {
+      width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .projects h4 {
+      margin-bottom: 0.5rem;
+    }
+    /* Contact Section */
+    .contact {
+      background-color: #1a1831;
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+    }
+    .contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input, textarea {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: #222; /* Dark input background */
+      color: #fff;
+    }
+    button {
+      padding: 0.75rem;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #bb86fc;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem 0;
+      color: #777;
+      background-color: #1a1831;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="tsparticles"></div>
+
+  <section class="hero">
+    <nav class="hero-nav">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Labs</a>
+      <a href="#">Projects</a>
+      <a href="#"><i class="fas fa-cog"></i> Settings</a>
+    </nav>
+<video autoplay muted loop playsinline class="hero-video">
+    <source src="vid.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+ 
+
+      <div class="hero-img-glow">
+        <img src="https://i.pravatar.cc/100" alt="avatar">
+      </div>
+      <h1 class="hero-heading">Hello! World</h1>
+      <h2>I am a <span class="highlight typed-text"></span></h2>
+      <p class="hero-para">I love building dynamic and engaging user experiences on the web.</p>
+      <button class="hero-button">View my work</button>
+      <div class="hero-tags">
+        <span>I'm a student</span>
+        <span>Developer</span>
+        <span>Problem Solver</span>
+      </div>
+      
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: true, zIndex: -1 },
+      particles: {
+        number: { value: 80 },
+        color: { value: "#bb86fc" },
+        shape: { type: "circle" },
+        opacity: { value: 0.6 },
+        size: { value: { min: 1, max: 5 } },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          outModes: { default: "bounce" }
+        },
+        links: {
+          enable: true,
+          distance: 120,
+          color: "#bb86fc",
+          opacity: 0.4,
+          width: 1
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { quantity: 4 }
+        }
+      },
+      background: {
+        color: "#0d0b1f"
+      }
+    });
+  </script>
+
+  <section class="section">
+    <h3 class="section-title">Skill Set</h3>
+    <div class="carousel-wrapper" id="carousel-wrapper">
+      <div class="carousel" id="carousel">
+        <div class="card" data-tilt><i class="fas fa-code"></i><h4>Front-End</h4><p>HTML, CSS, JS</p></div>
+        <div class="card" data-tilt><i class="fab fa-react"></i><h4>React.js</h4><p>Component-based UI</p></div>
+        <div class="card" data-tilt><i class="fas fa-server"></i><h4>Back-End</h4><p>Node.js & Express</p></div>
+        <div class="card" data-tilt><i class="fas fa-database"></i><h4>Database</h4><p>SQL & MongoDB</p></div>
+        <div class="card" data-tilt><i class="fas fa-cloud-upload-alt"></i><h4>Deployment</h4><p>Render, Railway</p></div>
+        <div class="card" data-tilt><i class="fas fa-code-branch"></i><h4>Git & GitHub</h4><p>Version Control</p></div>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h3 class="section-title">Example Projects</h3>
+    <div class="cards projects">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Project">
+        <h4>Example Project</h4>
+        <p>A web app for evaluating something useful.</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Project">
+        <h4>Example Project</h4>
+        <p>A tool for automated documentation generation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact">
+    <h3 style="font-size: 1.5rem; margin-bottom:1rem;">Contact</h3>
+    <form>
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <textarea rows="4" placeholder="Message"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PRADUMAN NARWARIYA. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let carousel = document.getElementById("carousel");
+    let cards = document.querySelectorAll(".carousel .card");
+    let currentIndex = 0;
+    let interval = setInterval(() => moveCarousel(1), 3000); // Auto slide every 3 seconds
+    let startX = 0; // For swipe gesture
+
+    function moveCarousel(step) {
+      currentIndex = (currentIndex + step + cards.length) % cards.length;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      let offset = -cards[currentIndex].offsetLeft + (document.querySelector(".carousel-wrapper").offsetWidth - cards[currentIndex].offsetWidth) / 2;
+      carousel.style.transform = `translateX(${offset}px)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      let dots = document.querySelectorAll(".carousel-dots span");
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === currentIndex);
+      });
+    }
+
+    function initDots() {
+      let dotContainer = document.getElementById("carousel-dots");
+      cards.forEach((_, idx) => {
+        let dot = document.createElement("span");
+        dot.onclick = () => {
+          currentIndex = idx;
+          updateCarousel();
+        };
+        dotContainer.appendChild(dot);
+      });
+      updateDots();
+    }
+
+    document.getElementById("carousel-wrapper").addEventListener("mouseover", () => clearInterval(interval));
+    document.getElementById("carousel-wrapper").addEventListener("mouseout", () => interval = setInterval(() => moveCarousel(1), 3000));
+
+    // Swipe Gesture Support
+    document.getElementById("carousel-wrapper").addEventListener("touchstart", e => startX = e.touches[0].clientX);
+    document.getElementById("carousel-wrapper").addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (endX - startX > 50) moveCarousel(-1);
+      else if (startX - endX > 50) moveCarousel(1);
+    });
+
+    window.onload = () => {
+      initDots();
+      updateCarousel();
+    }
+  </script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+  var typed = new Typed('.typed-text', {
+    strings: ["Web Developer", "Problem Solver", "Tech Enthusiast"],
+    typeSpeed: 60,
+    backSpeed: 30,
+    backDelay: 1500,
+    loop: true
+  });
+  </script>
+ 
+  </body>
+
+  
+          </html
+
