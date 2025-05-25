@@ -255,6 +255,7 @@
       padding: 2rem 1rem;
     }
     .projects .card {
+       width:200px;
       text-align: left;
       height: auto;
     }
