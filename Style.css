@@ -5,6 +5,7 @@
     }
     body {
       font-family: 'Outfit', sans-serif;
+      overflow : hidden ;
       background-color: #0d0b1f; 
       color: #fff; 
       line-height: 1.6;
