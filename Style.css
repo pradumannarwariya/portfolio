@@ -205,11 +205,8 @@
     .card:hover ~ .card ~ .card ~ .card {
       opacity: 0.5; /* Fade out siblings on hover */
     }
-    .card i {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      display: block;
-      color: #bb86fc; /* Icon color */
+    .card p {
+      font-size: 1rem;
     }
     .carousel-controls {
       position: absolute;
