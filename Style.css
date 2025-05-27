@@ -193,6 +193,9 @@
     background-position: 0% 50%;
   }
 }
+.card h4 {
+      font-size: 1.8rem;
+}
     .card:hover {
       transform: scale(1.05); /* Slight scale up on hover */
       box-shadow: 0 0 40px rgba(186, 104, 200, 1), inset 0 0 20px rgba(255, 255, 255, 0.15); /* Stronger shadow on hover */
