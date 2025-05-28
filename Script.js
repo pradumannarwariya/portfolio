@@ -194,3 +194,131 @@ document.querySelectorAll('.project').forEach(project => projectObserver.observe
         }
       });
     }
+
+const labels = ['HTML', 'CSS', 'JavaScript', 'Python', 'SQL'];
+    let skillsData = [95, 90, 85, 98, 75];
+
+    const radarCtx = document.getElementById('radarChart').getContext('2d');
+    const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+    const polarCtx = document.getElementById('polarChart').getContext('2d');
+
+    const colorSets = [
+      ['#00c9ff', '#92fe9d'],
+      ['#f2709c', '#ff9472'],
+      ['#fc6076', '#ff9a44'],
+      ['#43e97b', '#38f9d7'],
+      ['#30cfd0', '#330867']
+    ];
+
+    let offset = 0;
+
+    const createMovingGradient = (ctx, color1, color2, offset) => {
+      const gradient = ctx.createLinearGradient(offset % 400, 0, 400 + offset % 400, 400);
+      gradient.addColorStop(0, color1);
+      gradient.addColorStop(1, color2);
+      return gradient;
+    };
+
+    let radarChart, doughnutChart, polarChart;
+
+    const initCharts = () => {
+      radarChart = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Skill Level',
+            data: skillsData,
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderColor: '#00ffff',
+            pointBackgroundColor: '#fff',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          scales: {
+            r: {
+              min: 50,
+              max: 100,
+              angleLines: { color: '#444' },
+              grid: { color: '#666' },
+              pointLabels: { color: '#fff' },
+              ticks: { color: '#fff', backdropColor: 'transparent' }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#fff' } }
+          }
+        }
+      });
+
+      doughnutChart = new Chart(doughnutCtx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{
+            data: skillsData,
+            backgroundColor: colorSets.map(([c1, c2]) => createMovingGradient(doughnutCtx, c1, c2, offset)),
+            borderWidth: 2
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { labels: { color: '#fff' } }
+          }
+        }
+      });
+
+      polarChart = new Chart(polarCtx, {
+        type: 'polarArea',
+        data: {
+          labels,
+          datasets: [{
+            data: skillsData,
+            backgroundColor: colorSets.map(([c1, c2]) => createMovingGradient(polarCtx, c1, c2, offset)),
+            borderWidth: 2
+          }]
+        },
+        options: {
+          scales: {
+            r: {
+              min: 50,
+              max: 100,
+              ticks: { color: '#fff' },
+              grid: { color: '#666' }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#fff' } }
+          }
+        }
+      });
+    };
+
+    function animateGradients() {
+      offset += 2;
+      doughnutChart.data.datasets[0].backgroundColor =
+        colorSets.map(([c1, c2]) => createMovingGradient(doughnutCtx, c1, c2, offset));
+      polarChart.data.datasets[0].backgroundColor =
+        colorSets.map(([c1, c2]) => createMovingGradient(polarCtx, c1, c2, offset));
+
+      doughnutChart.update('none');
+      polarChart.update('none');
+
+      requestAnimationFrame(animateGradients);
+    }
+
+    function updateSkills() {
+      // Example: Updating skill levels
+      skillsData = [96, 91, 87, 99, 80];
+      radarChart.data.datasets[0].data = skillsData;
+      doughnutChart.data.datasets[0].data = skillsData;
+      polarChart.data.datasets[0].data = skillsData;
+
+      radarChart.update();
+      doughnutChart.update();
+      polarChart.update();
+    }
+
+    initCharts();
+    animateGradients();
