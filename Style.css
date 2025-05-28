@@ -582,14 +582,7 @@ form button {
 form button:hover {
   background-color: #bb86fc;
 }
-
-
-canvas {
-  width: 100% !important;
-  height: 300px !important;
-  border: 1px solid red; /* Add this line */
-}
-
+ 
 
 h1 {
       text-align: center;
