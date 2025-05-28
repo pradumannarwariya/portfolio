@@ -13,7 +13,6 @@
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 <link rel="stylesheet" href="Style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
 
 </head>
   
@@ -54,12 +53,76 @@
 
   
   
+<section class="projects-section">
+  <div class="project">
+    <img class="project-img" src="project1.jpg" alt="Project 1">
+    <div class="project-content">
+      <h3>Project One</h3>
+      <div class="typed-lines" data-lines='[
+        "Designed a responsive layout",
+        "With interactive features built",
+        "Using HTML, CSS, and JS",
+        "To showcase modern UI design",
+        "And create smooth user flow"
+      ]'></div>
+    </div>
+  </div>
+
+  <div class="project">
+    <img class="project-img" src="project2.jpg" alt="Project 2">
+    <div class="project-content">
+      <h3>Project Two</h3>
+      <div class="typed-lines" data-lines='[
+        "Built a full React app",
+        "Using component-based code",
+        "With reusable UI logic",
+        "And effective state control",
+        "For seamless user actions"
+      ]'></div>
+    </div>
+  </div>
+
+  <div class="project">
+    <img class="project-img" src="project3.jpg" alt="Project 3">
+    <div class="project-content">
+      <h3>Project Three</h3>
+      <div class="typed-lines" data-lines='[
+        "Developed backend APIs fast",
+        "With Node and Express stack",
+        "Handled secure user data",
+        "Ensured smooth JSON routes",
+        "For dynamic applications"
+      ]'></div>
+    </div>
+  </div>
+
+  <div class="project">
+    <img class="project-img" src="project4.jpg" alt="Project 4">
+    <div class="project-content">
+      <h3>Project Four</h3>
+      <div class="typed-lines" data-lines='[
+        "Deployed full-stack projects",
+        "On platforms like Railway",
+        "Automated builds and configs",
+        "Handled .env variables clean",
+        "For production readiness"
+      ]'></div>
+    </div>
+  </div>
+</section>  
+  
+  
+  
+  
 
   <section class="section">
     <h3 class="section-title">Skill Set</h3>
     <div class="carousel-wrapper" id="carousel-wrapper">
       <div class="carousel" id="carousel">
-        <div class="card" data-tilt>
+        <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="card" data-tilt>
   <h4><i class="fas fa-code"></i> Front-End</h4>
   <p>Designing responsive, user-friendly interfaces  
      using HTML, CSS, and JavaScript  
@@ -105,26 +168,86 @@
     </div>
   </section>
 
-  <section class="section">
-    <h3 class="section-title">Example Projects</h3>
-    <div class="cards projects">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Project">
-        <h4>Example Project</h4>
-        <p>A web app for evaluating something useful.</p>
+
+<section class="about-section">
+  <div class="about-container">
+    <img src="Avt.png" alt="Your Photo" class="about-image">
+    <div class="about-text">
+      <h2>Hello, I'm <span class="name">Praduman</span></h2>
+      <h3><span class="typed-text"></span>
+        </h3>
+      
+      
+      <p>
+        I'm a front-end web developer passionate about crafting responsive, user-friendly websites.
+        I focus on JavaScript, React, and Tailwind CSS. When I’m not coding, I enjoy UI animations and synthwave music
+        I’m a passionate and detail-oriented web developer who loves turning ideas into beautifully crafted digital experiences. With a strong foundation in HTML, CSS, and JavaScript.
+</p>
+With a strong foundation in HTML, CSS, and JavaScript
+    I am specialized in creating responsive, user-friendly websites that not only look good but perform seamlessly across all devices. My journey into development began with a curiosity for how websites work, and that curiosity quickly evolved into a deep love for coding and problem-solving.
+<p>
+      I enjoy exploring modern technologies like React, Tailwind CSS, and various animation libraries to bring interfaces to life with smooth transitions and engaging interactions. Whether it’s building elegant portfolio pages, interactive carousels, or complex UI components, I take pride in writing clean, efficient code that reflects both creativity and logic.
+  </p>
+
+<p>
+ Outside of development, I’m constantly learning and staying up to date with the latest trends in design and tech. I'm excited to keep growing as a developer, collaborating with other creative minds, and building digital solutions that make a meaningful impact.
+   </p>
+   
+      <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">View My Work</button>
+    </div>
+  </div>
+</section>
+
+
+
+
+ <section class="connect-section">
+    <div class="connect-left">
+      <h2>Connect</h2>
+      <div class="contact-info">
+        <p><strong>Name:</strong> Praduman Narwariya</p>
+        <p><strong>Email:</strong> praduman@example.com</p>
+        <p><strong>Phone:</strong> +91 9876543210</p>
+        <p><strong>Telegram:</strong> @praduman</p>
       </div>
     </div>
-  </section>
-
-  <section class="section contact">
-    <h3 style="font-size: 1.5rem; margin-bottom:1rem;">Contact</h3>
-    <form>
-      <input type="text" placeholder="Name" required />
-      <input type="email" placeholder="Email" required />
-      <textarea rows="4" placeholder="Message"></textarea>
-      <button type="submit">Submit</button>
-    </form>
-  </section>
+    <div class="connect-right">
+      <div class="social-icons">
+        <a href="#" class="icon" style="color:#E1306C;"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="icon" style="color:#1877F2;"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="icon" style="color:#333;"><i class="fab fa-github"></i></a>
+        <a href="#" class="icon" style="color:#FFFC00;"><i class="fab fa-snapchat-ghost"></i></a>
+        <a href="#" class="icon" style="color:#000;"><i class="fab fa-threads"></i></a>
+        <a href="#" class="icon" style="color:#0e76a8;"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="icon" style="color:#0088cc;"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+      <div class="buttons">
+        <button onclick="openModal('contact')">Contact Me</button>
+        <button onclick="openModal('feedback')">Feedback</button>
+      </div>
+    </div>
+  </section>  <!-- Contact Modal -->  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('contact')">&times;</span>
+      <h3>Contact Form</h3>
+      <form>
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="Email" required />
+        <textarea placeholder="Message" rows="4"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>  <!-- Feedback Modal -->  <div id="feedbackModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('feedback')">&times;</span>
+      <h3>Feedback Form</h3>
+      <form>
+        <input type="text" placeholder="Name" required />
+        <textarea placeholder="Your Feedback" rows="4"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2025 PRADUMAN NARWARIYA. All rights reserved.</p>
@@ -137,7 +260,7 @@
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    
+ <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     
   </body>
 

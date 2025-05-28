@@ -1,3 +1,4 @@
+      // ========================== Carousel ==========================
 let carousel = document.getElementById("carousel");
 let cards = document.querySelectorAll(".carousel .card");
 let currentIndex = 0;
@@ -47,11 +48,12 @@ document.getElementById("carousel-wrapper").addEventListener("touchend", e => {
   else if (startX - endX > 50) moveCarousel(1);
 });
 
+// ========================== On Load ==========================
 window.onload = () => {
   initDots();
   updateCarousel();
 
-  // Typed text
+  // Typed.js for Hero
   var typed = new Typed('.typed-text', {
     strings: ["Web Developer", "Problem Solver", "Tech Enthusiast"],
     typeSpeed: 60,
@@ -60,13 +62,13 @@ window.onload = () => {
     loop: true
   });
 
-  // Video control
+  // Video Speed Control
   const video = document.getElementById('heroVideo');
   if (video) {
     video.playbackRate = 0.3;
   }
 
-  // Particles
+  // tsParticles Background
   tsParticles.load("tsparticles", {
     fullScreen: { enable: true, zIndex: -1 },
     particles: {
@@ -104,4 +106,91 @@ window.onload = () => {
       color: "#0d0b1f"
     }
   });
+
+  // Observe About Me Animation
+  const aboutSection = document.querySelector(".about-container");
+  if (aboutSection) {
+    const aboutObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    });
+    aboutObserver.observe(aboutSection);
+  }
+};
+
+// ========================== Project Typing + Scroll Animations ==========================
+function startTyping(container) {
+  if (container.classList.contains('typed')) return;
+  container.classList.add('typed');
+
+  const lines = JSON.parse(container.getAttribute('data-lines'));
+  let currentLine = 0;
+  let currentChar = 0;
+  let content = '';
+
+  function typeLine() {
+    if (currentLine >= lines.length) return;
+
+    const line = lines[currentLine];
+    container.textContent = content + line.slice(0, currentChar) + '|';
+    currentChar++;
+
+    if (currentChar <= line.length) {
+      setTimeout(typeLine, 40);
+    } else {
+      content += line + '\n';
+      currentLine++;
+      currentChar = 0;
+      setTimeout(typeLine, 400);
+    }
+  }
+
+  typeLine();
 }
+
+const projectObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const project = entry.target;
+      project.classList.add('visible');
+
+      const img = project.querySelector('.project-img');
+      const heading = project.querySelector('h3');
+      const lines = project.querySelector('.typed-lines');
+
+      if (img) img.classList.add('visible');
+      if (heading) heading.classList.add('visible');
+      if (lines) startTyping(lines);
+
+      obs.unobserve(project);
+    }
+  });
+}, {
+  threshold: 0.3
+});
+
+document.querySelectorAll('.project').forEach(project => projectObserver.observe(project));
+      
+      
+      
+  function openModal(type) {
+      const modal = document.getElementById(type + 'Modal');
+      modal.style.display = 'flex';
+      modal.style.animation = 'fadeIn 0.5s ease';
+    }
+
+ function closeModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      ['contactModal', 'feedbackModal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
