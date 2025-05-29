@@ -280,6 +280,10 @@
       transform: translateY(60px);
       transition: all 1s ease;
     }
+.project-img:hover {
+      transform: scale(1.05); /* Slight scale up on hover */
+      box-shadow: 0 0 40px rgba(186, 104, 200, 1), inset 0 0 20px rgba(255, 255, 255, 0.15); /* Stronger shadow on hover */
+}
 
     .project-img.visible {
       opacity: 1;
