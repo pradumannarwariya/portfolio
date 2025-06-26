@@ -18,20 +18,24 @@
   
   
   <body>
+    
+       
+<nav class="glass-radio-group">
+  <a href="#home" class="nav-btn">Home</a>
+  <a href="#skill" class="nav-btn">Skills</a>
+  <a href="#contact" class="nav-btn">Contact</a>
+  <a href="#project" class="nav-btn">Projects</a>
+  <a href="#stats" class="nav-btn">Statistics</a>
+  <a href="#about" class="nav-btn">About</a>
+  <div class="glass-glider"></div>
+</nav>
+
 
   <div id="tsparticles"></div>
 
-  <section class="hero">
+  <section class="hero" id="home">
     
-    <nav class="hero-nav">
-      <a href="#">Home</a>
-      <a href="#about">About</a>
-      <a href="#stats">stats</a>
-      <a href="#project">Projects</a>
-      <a href="#skill">Skills</a>
-      <a href="#contact">Contact me</a>
-    </nav>
-    
+
 
     
     <div class="hero-content">
@@ -282,8 +286,22 @@ With a strong foundation in HTML, CSS, and JavaScript
  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const buttons = document.querySelectorAll(".glass-radio-group .nav-btn");
+  const glider = document.querySelector(".glass-glider");
+
+  buttons.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      // Remove previous active class
+      document.querySelector(".nav-btn.active")?.classList.remove("active");
+      btn.classList.add("active");
+      // Move glider
+      glider.style.transform = `translateX(${i * 100}%)`;
+    });
+  });
+</script>
   </body>
 
   
-          </html
+          </html>
 
