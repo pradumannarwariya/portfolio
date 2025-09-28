@@ -1,423 +1,392 @@
-// ========================== Carousel ==========================
-const carousel = document.getElementById("carousel");
-const cards = document.querySelectorAll(".carousel .card");
-let currentIndex = 0;
-// Automatically move the carousel every 3 seconds
-let interval = setInterval(() => moveCarousel(1), 3000);
-let startX = 0; // For touch swipe detection
+        // --- Sound Effects ---
+        const synth = new Tone.Synth().toDestination();
+        document.querySelectorAll('.interactive-sound').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                // Tone.start() is essential for audio to work in many browsers
+                if (Tone.context.state !== 'running') {
+                    Tone.start();
+                }
+                synth.triggerAttackRelease("C5", "8n");
+            });
+        });
 
-/**
- * Moves the carousel by a given number of steps.
- * @param {number} step The number of cards to move (positive for right, negative for left).
- */
-function moveCarousel(step) {
-  // Calculate the new index, wrapping around if necessary
-  currentIndex = (currentIndex + step + cards.length) % cards.length;
-  updateCarousel();
-}
+        // --- On-Scroll Animations ---
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-/**
- * Updates the visual position of the carousel to show the current card.
- */
-function updateCarousel() {
-  // Calculate the offset to center the current card in the wrapper
-  const offset = -cards[currentIndex].offsetLeft +
-    (document.querySelector(".carousel-wrapper").offsetWidth - cards[currentIndex].offsetWidth) / 2;
-  carousel.style.transform = `translateX(${offset}px)`;
-  updateDots();
-}
+        document.querySelectorAll('.scroll-animate-target').forEach(el => {
+            scrollObserver.observe(el);
+        });
 
-/**
- * Updates the active state of the carousel navigation dots.
- */
-function updateDots() {
-  const dots = document.querySelectorAll(".carousel-dots span");
-  dots.forEach((dot, idx) => {
-    // Toggle the 'active' class based on whether the dot's index matches the current index
-    dot.classList.toggle("active", idx === currentIndex);
-  });
-}
+        // --- Parallax Starfield Effect ---
+        const parallaxFarCanvas = document.getElementById('parallax-stars-far');
+        const parallaxCloseCanvas = document.getElementById('parallax-stars-close');
+        const pFarCtx = parallaxFarCanvas.getContext('2d');
+        const pCloseCtx = parallaxCloseCanvas.getContext('2d');
 
-/**
- * Initializes the carousel navigation dots.
- */
-function initDots() {
-  const dotContainer = document.getElementById("carousel-dots");
-  cards.forEach((_, idx) => {
-    const dot = document.createElement("span");
-    // Add a click listener to each dot to navigate to the corresponding card
-    dot.onclick = () => {
-      currentIndex = idx;
-      updateCarousel();
-    };
-    dotContainer.appendChild(dot);
-  });
-  updateDots(); // Set the initial active dot
-}
+        let starsFar = [];
+        let starsClose = [];
 
-// Pause automatic carousel on mouseover
-const carouselWrapper = document.getElementById("carousel-wrapper");
-if (carouselWrapper) {
-  carouselWrapper.addEventListener("mouseover", () => clearInterval(interval));
-  // Resume automatic carousel on mouseout
-  carouselWrapper.addEventListener("mouseout", () => interval = setInterval(() => moveCarousel(1), 3000));
+        function setupParallax() {
+            parallaxFarCanvas.width = window.innerWidth;
+            parallaxFarCanvas.height = window.innerHeight;
+            parallaxCloseCanvas.width = window.innerWidth;
+            parallaxCloseCanvas.height = window.innerHeight;
+            starsFar = [];
+            starsClose = [];
 
-  // Touch event listeners for swipe navigation
-  carouselWrapper.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-  carouselWrapper.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    // Swipe left to go to the next card
-    if (startX - endX > 50) moveCarousel(1);
-    // Swipe right to go to the previous card
-    else if (endX - startX > 50) moveCarousel(-1);
-  });
-}
-
-// ========================== On Load ==========================
-window.onload = () => {
-  initDots();
-  updateCarousel();
-
-  // Typed.js for Hero section text animation
-  const typedElement = document.querySelector('.typed-text');
-  if (typedElement) {
-    const typed = new Typed(typedElement, {
-      strings: ["Web Developer", "Problem Solver", "Tech Enthusiast"],
-      typeSpeed: 60,
-      backSpeed: 30,
-      backDelay: 1500,
-      loop: true
-    });
-  }
-
-  // Control the playback speed of the hero video
-  const video = document.getElementById('heroVideo');
-  if (video) {
-    video.playbackRate = 0.3;
-  }
-
-  // tsParticles Background configuration
-  tsParticles.load("tsparticles", {
-    fullScreen: { enable: true, zIndex: -1 },
-    particles: {
-      number: { value: 80 },
-      color: { value: "#bb86fc" },
-      shape: { type: "circle" },
-      opacity: { value: 0.6 },
-      size: { value: { min: 1, max: 5 } },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: "none",
-        outModes: { default: "bounce" }
-      },
-      links: {
-        enable: true,
-        distance: 120,
-        color: "#bb86fc",
-        opacity: 0.4,
-        width: 1
-      }
-    },
-    interactivity: {
-      events: {
-        onHover: { enable: true, mode: "repulse" },
-        onClick: { enable: true, mode: "push" },
-        resize: true
-      },
-      modes: {
-        repulse: { distance: 100 },
-        push: { quantity: 4 }
-      }
-    },
-    background: {
-      color: "#0d0b1f"
-    }
-  });
-
-  // Intersection Observer for About Me section animation
-  const aboutSection = document.querySelector(".about-container");
-  if (aboutSection) {
-    const aboutObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          // No need to unobserve as we might want the animation to trigger again if the user scrolls back
+            // Create far stars
+            for (let i = 0; i < 200; i++) {
+                starsFar.push({
+                    x: Math.random() * parallaxFarCanvas.width,
+                    y: Math.random() * parallaxFarCanvas.height,
+                    radius: Math.random() * 0.8,
+                });
+            }
+            // Create close stars
+            for (let i = 0; i < 50; i++) {
+                starsClose.push({
+                    x: Math.random() * parallaxCloseCanvas.width,
+                    y: Math.random() * parallaxCloseCanvas.height,
+                    radius: Math.random() * 1.5 + 0.5,
+                });
+            }
         }
-      });
-    });
-    aboutObserver.observe(aboutSection);
-  }
 
-  // Initialize the charts
-  initCharts();
-  // Start the gradient animation for the charts
-  animateGradients();
-};
+        function drawParallax() {
+            const scrollY = window.scrollY;
 
-// ========================== Project Typing + Scroll Animations ==========================
-/**
- * Starts the typing animation for a given container element.
- * @param {HTMLElement} container The element containing the lines to be typed.
- */
-function startTyping(container) {
-  // Prevent re-typing if already typed
-  if (container.classList.contains('typed')) return;
-  container.classList.add('typed');
+            // Draw far stars
+            pFarCtx.clearRect(0, 0, parallaxFarCanvas.width, parallaxFarCanvas.height);
+            pFarCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            starsFar.forEach(star => {
+                pFarCtx.beginPath();
+                const y = (star.y - scrollY * 0.1) % parallaxFarCanvas.height;
+                pFarCtx.arc(star.x, y < 0 ? y + parallaxFarCanvas.height : y, star.radius, 0, Math.PI * 2);
+                pFarCtx.fill();
+            });
 
-  const lines = JSON.parse(container.getAttribute('data-lines'));
-  let currentLine = 0;
-  let currentChar = 0;
-  let content = '';
-
-  /**
-   * Types the characters of the current line.
-   */
-  function typeLine() {
-    if (currentLine >= lines.length) return;
-
-    const line = lines[currentLine];
-    container.textContent = content + line.slice(0, currentChar) + '|';
-    currentChar++;
-
-    if (currentChar <= line.length) {
-      setTimeout(typeLine, 40); // Typing speed
-    } else {
-      content += line + '\n';
-      currentLine++;
-      currentChar = 0;
-      setTimeout(typeLine, 400); // Delay before next line
-    }
-  }
-
-  typeLine();
-}
-
-// Intersection Observer for Project section animations
-const projectObserver = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const project = entry.target;
-      project.classList.add('visible');
-
-      const img = project.querySelector('.project-img');
-      const heading = project.querySelector('h3');
-      const lines = project.querySelector('.typed-lines');
-
-      if (img) img.classList.add('visible');
-      if (heading) heading.classList.add('visible');
-      if (lines) startTyping(lines);
-
-      obs.unobserve(project); // Only animate once
-    }
-  });
-}, {
-  threshold: 0.3 // Trigger when 30% of the element is visible
-});
-
-document.querySelectorAll('.project').forEach(project => projectObserver.observe(project));
-
-// ========================== Modal Functionality ==========================
-/**
- * Opens a modal window.
- * @param {string} type The type of modal to open ('contact' or 'feedback').
- */
-function openModal(type) {
-  const modal = document.getElementById(type + 'Modal');
-  if (modal) {
-    modal.style.display = 'flex';
-    // Add fade-in animation class
-    setTimeout(() => {
-      modal.style.animation = 'fadeIn 0.5s ease';
-    }, 0);
-  }
-}
-
-/**
- * Closes a modal window.
- * @param {string} type The type of modal to close ('contact' or 'feedback').
- */
-function closeModal(type) {
-  const modal = document.getElementById(type + 'Modal');
-  if (modal) {
-    modal.style.animation = 'fadeOut 0.3s ease forwards';
-    setTimeout(() => {
-      modal.style.display = 'none';
-      modal.style.animation = ''; // Reset animation
-    }, 300);
-  }
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-  ['contactModal', 'feedbackModal'].forEach(id => {
-    const modal = document.getElementById(id);
-    if (modal && event.target === modal) {
-      closeModal(id.replace('Modal', ''));
-    }
-  });
-};
-
-// ========================== Chart.js Implementation ==========================
-const labels = ['HTML', 'CSS', 'JavaScript', 'Python', 'SQL'];
-let skillsData = [95, 90, 85, 98, 75];
-
-// Get the 2D rendering contexts of the canvas elements
-const radarCtx = document.getElementById('radarChart').getContext('2d');
-const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
-const polarCtx = document.getElementById('polarChart').getContext('2d');
-
-// Array of color pairs for gradients
-const colorSets = [
-  ['#00c9ff', '#92fe9d'],
-  ['#f2709c', '#ff9472'],
-  ['#fc6076', '#ff9a44'],
-  ['#43e97b', '#38f9d7'],
-  ['#30cfd0', '#330867']
-];
-
-let offset = 0; // Offset for the moving gradient effect
-
-/**
- * Creates a linear gradient with a moving effect.
- * @param {CanvasRenderingContext2D} ctx The 2D rendering context.
- * @param {string} color1 The starting color of the gradient.
- * @param {string} color2 The ending color of the gradient.
- * @param {number} offset The current offset for the gradient.
- * @returns {CanvasGradient} The created linear gradient.
- */
-const createMovingGradient = (ctx, color1, color2, offset) => {
-  const gradient = ctx.createLinearGradient(offset % 400, 0, 400 + offset % 400, 400);
-  gradient.addColorStop(0, color1);
-  gradient.addColorStop(1, color2);
-  return gradient;
-};
-
-// Chart instances
-let radarChart, doughnutChart, polarChart;
-
-/**
- * Initializes the Chart.js charts.
- */
-const initCharts = () => {
-  if (radarCtx) {
-    radarChart = new Chart(radarCtx, {
-      type: 'radar',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Skill Level',
-          data: skillsData,
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          borderColor: '#00ffff',
-          pointBackgroundColor: '#fff',
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          r: {
-            min: 50,
-            max: 100,
-            angleLines: { color: '#444' },
-            grid: { color: '#666' },
-            pointLabels: { color: '#fff' },
-            ticks: { color: '#fff', backdropColor: 'transparent' }
-          }
-        },
-        plugins: {
-          legend: { labels: { color: '#fff' } }
+            // Draw close stars
+            pCloseCtx.clearRect(0, 0, parallaxCloseCanvas.width, parallaxCloseCanvas.height);
+            pCloseCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            starsClose.forEach(star => {
+                pCloseCtx.beginPath();
+                const y = (star.y - scrollY * 0.4) % parallaxCloseCanvas.height;
+                pCloseCtx.arc(star.x, y < 0 ? y + parallaxCloseCanvas.height : y, star.radius, 0, Math.PI * 2);
+                pCloseCtx.fill();
+            });
         }
-      }
-    });
-    console.log("Radar Chart initialized:", radarChart);
-  }
+        
+        window.addEventListener('scroll', () => {
+             requestAnimationFrame(drawParallax);
+        });
+        window.addEventListener('resize', () => {
+            setupParallax();
+            drawParallax();
+        });
 
-  if (doughnutCtx) {
-    doughnutChart = new Chart(doughnutCtx, {
-      type: 'doughnut',
-      data: {
-        labels,
-        datasets: [{
-          data: skillsData,
-          backgroundColor: colorSets.map(([c1, c2]) => createMovingGradient(doughnutCtx, c1, c2, offset)),
-          borderWidth: 2
-        }]
-      },
-      options: {
-        plugins: {
-          legend: { labels: { color: '#fff' } }
+        setupParallax();
+        drawParallax();
+
+
+        // --- Pac-Man Game Simulation ---
+        const canvas = document.getElementById('game-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const btnAiDemo = document.getElementById('btn-ai-demo');
+            const btnPlayMode = document.getElementById('btn-play-mode');
+            const controlsText = document.getElementById('controls-text');
+
+            const gridSize = 20;
+            const tileCount = canvas.width / gridSize;
+            let isPlayerControlled = false;
+            
+            const map = [
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
+                [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+                [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
+                [1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1],
+                [1,1,1,1,0,1,1,1,2,2,2,2,1,1,1,0,1,1,1,1],
+                [1,1,1,1,0,1,2,2,2,2,2,2,2,2,1,0,1,1,1,1],
+                [1,1,1,1,0,1,2,2,2,2,2,2,2,2,1,0,1,1,1,1],
+                [1,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,1],
+                [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+                [1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1],
+                [1,0,0,0,0,1,0,1,1,1,1,1,1,0,1,0,0,0,0,1],
+                [1,1,1,0,1,1,0,0,0,1,1,0,0,0,1,1,0,1,1,1],
+                [1,0,0,0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,1],
+                [1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1],
+                [1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1],
+                [1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            ];
+
+            const pacman = {
+                x: gridSize,
+                y: gridSize,
+                radius: gridSize / 2 - 2,
+                speed: 1.8,
+                direction: 'right',
+                nextDirection: 'right',
+                mouthOpenValue: 40,
+                mouthChangeSpeed: 5,
+            };
+            
+            const ghosts = [
+                { x: gridSize * 9, y: gridSize * 8, speed: 1.4, direction: 'up', color: '#ef4444'},
+                { x: gridSize * 10, y: gridSize * 8, speed: 1.4, direction: 'up', color: '#f472b6'},
+                { x: gridSize * 9, y: gridSize * 9, speed: 1.4, direction: 'left', color: '#67e8f9'},
+                { x: gridSize * 10, y: gridSize * 9, speed: 1.4, direction: 'right', color: '#f97316'}
+            ];
+
+            let pellets = [];
+
+            function resetPacman() {
+                pacman.x = gridSize;
+                pacman.y = gridSize;
+                pacman.direction = 'right';
+                pacman.nextDirection = 'right';
+            }
+
+            function isWall(x, y, forGhost = false) {
+                const gridX = Math.floor(x / gridSize);
+                const gridY = Math.floor(y / gridSize);
+                if(gridX < 0 || gridX >= tileCount || gridY < 0 || gridY >= tileCount) return true;
+                const tile = map[gridY][gridX];
+                if (forGhost) return tile === 1;
+                return tile === 1 || tile === 2;
+            }
+
+            function createPellets() {
+                pellets = [];
+                for (let y = 0; y < tileCount; y++) {
+                    for (let x = 0; x < tileCount; x++) {
+                        if (map[y][x] === 0) {
+                            pellets.push({ x: x * gridSize + gridSize / 2, y: y * gridSize + gridSize / 2, radius: 2 });
+                        }
+                    }
+                }
+            }
+            
+            function drawWalls() {
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 5;
+                ctx.lineCap = 'round';
+                for (let y = 0; y < tileCount; y++) {
+                    for (let x = 0; x < tileCount; x++) {
+                        if (map[y][x] !== 1) continue;
+                        const centerX = x * gridSize + gridSize / 2;
+                        const centerY = y * gridSize + gridSize / 2;
+                        if (x < tileCount - 1 && map[y][x + 1] === 1) {
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, centerY);
+                            ctx.lineTo(centerX + gridSize, centerY);
+                            ctx.stroke();
+                        }
+                        if (y < tileCount - 1 && map[y + 1][x] === 1) {
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, centerY);
+                            ctx.lineTo(centerX, centerY + gridSize);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function drawPacman() {
+                const angle = 0.2 * Math.PI * (pacman.mouthOpenValue / 40);
+                ctx.save();
+                ctx.translate(pacman.x + gridSize / 2, pacman.y + gridSize / 2);
+                let rotation = 0;
+                if (pacman.direction === 'left') rotation = Math.PI;
+                if (pacman.direction === 'up') rotation = -0.5 * Math.PI;
+                if (pacman.direction === 'down') rotation = 0.5 * Math.PI;
+                ctx.rotate(rotation);
+                ctx.beginPath();
+                ctx.arc(0, 0, pacman.radius, angle, -angle);
+                ctx.lineTo(0, 0);
+                ctx.fillStyle = '#facc15';
+                ctx.fill();
+                ctx.closePath();
+                ctx.restore();
+            }
+
+            function drawGhosts() {
+                ghosts.forEach(ghost => {
+                    ctx.fillStyle = ghost.color;
+                    const bodyHeight = pacman.radius;
+                    const bodyWidth = pacman.radius * 2;
+                    ctx.beginPath();
+                    ctx.arc(ghost.x + gridSize/2, ghost.y + gridSize/2, pacman.radius, Math.PI, 0);
+                    ctx.fillRect(ghost.x + (gridSize/2 - pacman.radius), ghost.y + gridSize/2, bodyWidth, bodyHeight);
+                    for(let i = 0; i < 3; i++){
+                        ctx.arc(ghost.x + (gridSize/2 - pacman.radius) + (i * bodyWidth/3) + bodyWidth/6, ghost.y + gridSize/2 + bodyHeight, bodyWidth/6, 0, Math.PI);
+                    }
+                    ctx.fill();
+                    ctx.closePath();
+                    ctx.fillStyle = 'white';
+                    ctx.beginPath();
+                    ctx.arc(ghost.x + 8, ghost.y + 9, 4, 0, Math.PI * 2);
+                    ctx.arc(ghost.x + 16, ghost.y + 9, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = 'black';
+                    ctx.beginPath();
+                    ctx.arc(ghost.x + 8, ghost.y + 9, 2, 0, Math.PI * 2);
+                    ctx.arc(ghost.x + 16, ghost.y + 9, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            }
+
+            function drawPellets() {
+                pellets.forEach(pellet => {
+                    ctx.beginPath();
+                    ctx.arc(pellet.x, pellet.y, pellet.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = '#f9a8d4';
+                    ctx.fill();
+                    ctx.closePath();
+                });
+            }
+
+            function updateAI(character, isGhost = false) {
+                 const possibleDirections = [];
+                 const opposites = { 'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left' };
+                 const directions = ['up', 'down', 'left', 'right'];
+                 directions.forEach(dir => {
+                     if (dir !== opposites[character.direction]) {
+                         if (dir === 'up' && !isWall(character.x, character.y - character.speed, isGhost)) possibleDirections.push(dir);
+                         if (dir === 'down' && !isWall(character.x, character.y + character.speed + gridSize, isGhost)) possibleDirections.push(dir);
+                         if (dir === 'left' && !isWall(character.x - character.speed, character.y, isGhost)) possibleDirections.push(dir);
+                         if (dir === 'right' && !isWall(character.x + character.speed + gridSize, character.y, isGhost)) possibleDirections.push(dir);
+                     }
+                 });
+                 let isStuck = true;
+                 if (character.direction === 'up' && !isWall(character.x, character.y - character.speed, isGhost)) isStuck = false;
+                 if (character.direction === 'down' && !isWall(character.x, character.y + character.speed + gridSize, isGhost)) isStuck = false;
+                 if (character.direction === 'left' && !isWall(character.x - character.speed, character.y, isGhost)) isStuck = false;
+                 if (character.direction === 'right' && !isWall(character.x + character.speed + gridSize, character.y, isGhost)) isStuck = false;
+                 if (isStuck || (character.x % gridSize < 2 && character.y % gridSize < 2 && possibleDirections.length > 0)) {
+                      character.direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
+                 }
+                 if (character.direction === 'up') character.y -= character.speed;
+                 if (character.direction === 'down') character.y += character.speed;
+                 if (character.direction === 'left') character.x -= character.speed;
+                 if (character.direction === 'right') character.x += character.speed;
+                if (character.x < -gridSize) character.x = canvas.width;
+                if (character.x > canvas.width) character.x = -gridSize;
+            }
+            
+            function updatePacman() {
+                 pacman.mouthOpenValue += pacman.mouthChangeSpeed;
+                 if (pacman.mouthOpenValue > 40 || pacman.mouthOpenValue < 5) {
+                     pacman.mouthChangeSpeed *= -1;
+                 }
+
+                 if (isPlayerControlled) {
+                    // Player logic
+                    let nextX = pacman.x, nextY = pacman.y;
+                    if (pacman.nextDirection === 'right') nextX += pacman.speed;
+                    if (pacman.nextDirection === 'left') nextX -= pacman.speed;
+                    if (pacman.nextDirection === 'up') nextY -= pacman.speed;
+                    if (pacman.nextDirection === 'down') nextY += pacman.speed;
+
+                    if (!isWall(nextX, pacman.y) && !isWall(nextX + gridSize -1, pacman.y) && !isWall(nextX, pacman.y + gridSize -1) && !isWall(nextX + gridSize -1, pacman.y + gridSize -1)){
+                        pacman.direction = pacman.nextDirection;
+                    }
+
+                    if (pacman.direction === 'right' && !isWall(pacman.x + pacman.speed + gridSize, pacman.y)) pacman.x += pacman.speed;
+                    if (pacman.direction === 'left' && !isWall(pacman.x - pacman.speed, pacman.y)) pacman.x -= pacman.speed;
+                    if (pacman.direction === 'up' && !isWall(pacman.x, pacman.y - pacman.speed)) pacman.y -= pacman.speed;
+                    if (pacman.direction === 'down' && !isWall(pacman.x, pacman.y + pacman.speed + gridSize)) pacman.y += pacman.speed;
+                 } else {
+                    // AI logic
+                    updateAI(pacman, false);
+                 }
+            }
+
+            function checkCollisions() {
+                for (let i = pellets.length - 1; i >= 0; i--) {
+                    const pellet = pellets[i];
+                    const p_center_x = pacman.x + gridSize / 2;
+                    const p_center_y = pacman.y + gridSize / 2;
+                    const dist = Math.sqrt((p_center_x - pellet.x)**2 + (p_center_y - pellet.y)**2);
+                    if (dist < pacman.radius + pellet.radius) {
+                        pellets.splice(i, 1);
+                    }
+                }
+                 if (pellets.length === 0) {
+                    createPellets();
+                    resetPacman(); // Reset when all pellets are eaten
+                 }
+
+                 // In play mode, ghost collision resets Pac-Man
+                 if (isPlayerControlled) {
+                     ghosts.forEach(ghost => {
+                        const p_center_x = pacman.x + gridSize / 2;
+                        const p_center_y = pacman.y + gridSize / 2;
+                        const g_center_x = ghost.x + gridSize / 2;
+                        const g_center_y = ghost.y + gridSize / 2;
+                        const dist = Math.sqrt((p_center_x - g_center_x)**2 + (p_center_y - g_center_y)**2);
+                        if (dist < pacman.radius * 1.5) {
+                            resetPacman();
+                        }
+                     });
+                 }
+            }
+            
+            function setMode(isPlayer) {
+                isPlayerControlled = isPlayer;
+                resetPacman();
+                if (isPlayer) {
+                    btnPlayMode.classList.add('bg-cyan-500', 'text-white');
+                    btnPlayMode.classList.remove('border', 'border-cyan-500', 'text-cyan-400');
+                    btnAiDemo.classList.remove('bg-cyan-500', 'text-white');
+                    btnAiDemo.classList.add('border', 'border-cyan-500', 'text-cyan-400');
+                    controlsText.textContent = 'Use Arrow Keys to Control';
+                } else {
+                    btnAiDemo.classList.add('bg-cyan-500', 'text-white');
+                    btnAiDemo.classList.remove('border', 'border-cyan-500', 'text-cyan-400');
+                    btnPlayMode.classList.remove('bg-cyan-500', 'text-white');
+                    btnPlayMode.classList.add('border', 'border-cyan-500', 'text-cyan-400');
+                    controlsText.textContent = '';
+                }
+            }
+
+            btnAiDemo.addEventListener('click', () => setMode(false));
+            btnPlayMode.addEventListener('click', () => setMode(true));
+
+            window.addEventListener('keydown', (e) => {
+                if(isPlayerControlled) {
+                     switch(e.key) {
+                        case 'ArrowUp': e.preventDefault(); pacman.nextDirection = 'up'; break;
+                        case 'ArrowDown': e.preventDefault(); pacman.nextDirection = 'down'; break;
+                        case 'ArrowLeft': e.preventDefault(); pacman.nextDirection = 'left'; break;
+                        case 'ArrowRight': e.preventDefault(); pacman.nextDirection = 'right'; break;
+                    }
+                }
+            });
+
+            function gameLoop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawWalls();
+                drawPellets();
+                drawGhosts();
+                drawPacman();
+                updatePacman();
+                ghosts.forEach(ghost => updateAI(ghost, true));
+                checkCollisions();
+                requestAnimationFrame(gameLoop);
+            }
+            
+            createPellets();
+            setMode(false); // Start in AI Demo mode
+            gameLoop();
         }
-      }
-    });
-    console.log("Doughnut Chart initialized:", doughnutChart);
-  }
-
-  if (polarCtx) {
-    polarChart = new Chart(polarCtx, {
-      type: 'polarArea',
-      data: {
-        labels,
-        datasets: [{
-          data: skillsData,
-          backgroundColor: colorSets.map(([c1, c2]) => createMovingGradient(polarCtx, c1, c2, offset)),
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          r: {
-            min: 50,
-            max: 100,
-            ticks: { color: '#fff' },
-            grid: { color: '#666' }
-          }
-        },
-        plugins: {
-          legend: { labels: { color: '#fff' } }
-        }
-      }
-    });
-    console.log("Polar Chart initialized:", polarChart);
-  }
-};
-
-/**
- * Animates the gradients of the doughnut and polar area charts.
- */
-function animateGradients() {
-  offset += 2;
-  if (doughnutChart && doughnutChart.data) {
-    doughnutChart.data.datasets[0].backgroundColor =
-      colorSets.map(([c1, c2]) => createMovingGradient(doughnutCtx, c1, c2, offset));
-    doughnutChart.update('none');
-  }
-  if (polarChart && polarChart.data) {
-    polarChart.data.datasets[0].backgroundColor =
-      colorSets.map(([c1, c2]) => createMovingGradient(polarCtx, c1, c2, offset));
-    polarChart.update('none');
-  }
-  requestAnimationFrame(animateGradients);
-}
-
-/**
- * Example function to update the skill data and refresh the charts.
- */
-function updateSkills() {
-  skillsData = [96, 91, 87, 99, 80];
-  if (radarChart && radarChart.data) {
-    radarChart.data.datasets[0].data = skillsData;
-    radarChart.update();
-  }
-  if (doughnutChart && doughnutChart.data) {
-    doughnutChart.data.datasets[0].data = skillsData;
-    doughnutChart.update();
-  }
-  if (polarChart && polarChart.data) {
-    polarChart.data.datasets[0].data = skillsData;
-    polarChart.update();
-  }
-}
-
-// The initCharts and animateGradients functions are called within the window.onload event
-// to ensure the DOM is fully loaded.
