@@ -1,307 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Praduman Narwariya’s Portfolio</title>
-  
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-<link rel="stylesheet" href="Style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praduman Narwariya - JavaScript Game Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    </head>
+<body class="bg-slate-950 text-gray-200 antialiased">
 
-</head>
-  
-  
-  <body>
-    
-       
-<nav class="glass-radio-group">
-  <a href="#home" class="nav-btn">Home</a>
-  <a href="#skill" class="nav-btn">Skills</a>
-  <a href="#contact" class="nav-btn">Contact</a>
-  <a href="#project" class="nav-btn">Projects</a>
-  <a href="#stats" class="nav-btn">Statistics</a>
-  <a href="#about" class="nav-btn">About</a>
-  <div class="glass-glider"></div>
-</nav>
-
-
-  <div id="tsparticles"></div>
-
-  <section class="hero" id="home">
-    
-
-
-    
-    <div class="hero-content">
-      <div class="hero-img-glow">
-        <img src="assets/images/IMG_20250211_160204_395~3.jpg" alt="avatar">
-      </div>
-      <h1 class="hero-heading">Hello! World</h1>
-      <h2>I am a <span class="highlight typed-text"></span></h2>
-      <p class="hero-para">I love building dynamic and engaging user experiences on the web.</p>
-      <button class="hero-button">View my work</button>
-      <div class="hero-tags">
-        <span>I'm a student</span>
-        <span>Developer</span>
-        <span>Problem Solver</span>
-      </div>
-      
-  </section>
-
-  
-  
-<section class="projects-section" id="project">
-  <div class="project">
-    <img class="project-img" src="project1.jpg" alt="Project 1">
-    <div class="project-content">
-      <h3>Project One</h3>
-      <div class="typed-lines" data-lines='[
-        "Designed a responsive layout",
-        "With interactive features built",
-        "Using HTML, CSS, and JS",
-        "To showcase modern UI design",
-        "And create smooth user flow"
-      ]'></div>
-    </div>
-  </div>
-
-  <div class="project">
-    <img class="project-img" src="project2.jpg" alt="Project 2">
-    <div class="project-content">
-      <h3>Project Two</h3>
-      <div class="typed-lines" data-lines='[
-        "Built a full React app",
-        "Using component-based code",
-        "With reusable UI logic",
-        "And effective state control",
-        "For seamless user actions"
-      ]'></div>
-    </div>
-  </div>
-
-  <div class="project">
-    <img class="project-img" src="project3.jpg" alt="Project 3">
-    <div class="project-content">
-      <h3>Project Three</h3>
-      <div class="typed-lines" data-lines='[
-        "Developed backend APIs fast",
-        "With Node and Express stack",
-        "Handled secure user data",
-        "Ensured smooth JSON routes",
-        "For dynamic applications"
-      ]'></div>
-    </div>
-  </div>
-
-  <div class="project">
-    <img class="project-img" src="project4.jpg" alt="Project 4">
-    <div class="project-content">
-      <h3>Project Four</h3>
-      <div class="typed-lines" data-lines='[
-        "Deployed full-stack projects",
-        "On platforms like Railway",
-        "Automated builds and configs",
-        "Handled .env variables clean",
-        "For production readiness"
-      ]'></div>
-    </div>
-  </div>
-</section>  
-  
-  
-  
-  
-
-  <section class="section" id="skill">
-    <h3 class="section-title">Skill Set</h3>
-    <div class="carousel-wrapper" id="carousel-wrapper">
-      <div class="carousel" id="carousel">
-        <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<div class="card" data-tilt>
-  <h4><i class="fas fa-code"></i> Front-End</h4>
-  <p>Designing responsive, user-friendly interfaces  
-     using HTML, CSS, and JavaScript  
-     to ensure smooth interactions.</p>
-</div>
-
-<div class="card" data-tilt>
-  <h4><i class="fab fa-react"></i> React.js</h4>
-  <p>Creating modular UI components  
-     with React and hooks  
-     for scalable, fast web apps.</p>
-</div>
-
-<div class="card" data-tilt>
-  <h4><i class="fas fa-server"></i> Back-End</h4>
-  <p>Building APIs with Express  
-     and handling server logic  
-     using efficient Node.js code.</p>
-</div>
-
-<div class="card" data-tilt>
-  <h4><i class="fas fa-database"></i> Database</h4>
-  <p>Working with SQL and MongoDB  
-     to store, retrieve, and manage  
-     structured or flexible data.</p>
-</div>
-
-<div class="card" data-tilt>
-  <h4><i class="fas fa-rocket"></i> Deployment</h4>
-  <p>Deploying apps on platforms  
-     like Render and Railway  
-     with environment setup.</p>
-</div>
-
-<div class="card" data-tilt>
-  <h4><i class="fab fa-git-alt"></i> Git & GitHub</h4>
-  <p>Using Git for version control  
-     and GitHub to collaborate  
-     and manage clean histories.</p>
-</div>
-      </div>
-      <div class="carousel-dots" id="carousel-dots"></div>
-    </div>
-  </section>
-
-
-<section class="about-section" id="about">
-  <div class="about-container">
-    <img src="assets/images/Avt.jpg" alt="Your Photo" class="about-image">
-    <div class="about-text">
-      <h2>Hello, I'm <span class="name">Praduman</span></h2>
-      <h3><span class="typed-text"></span>
-        </h3>
-      
-      
-      <p>
-        I'm a front-end web developer passionate about crafting responsive, user-friendly websites.
-        I focus on JavaScript, React, and Tailwind CSS. When I’m not coding, I enjoy UI animations and synthwave music
-        I’m a passionate and detail-oriented web developer who loves turning ideas into beautifully crafted digital experiences. With a strong foundation in HTML, CSS, and JavaScript.
-</p>
-With a strong foundation in HTML, CSS, and JavaScript
-    I am specialized in creating responsive, user-friendly websites that not only look good but perform seamlessly across all devices. My journey into development began with a curiosity for how websites work, and that curiosity quickly evolved into a deep love for coding and problem-solving.
-<p>
-      I enjoy exploring modern technologies like React, Tailwind CSS, and various animation libraries to bring interfaces to life with smooth transitions and engaging interactions. Whether it’s building elegant portfolio pages, interactive carousels, or complex UI components, I take pride in writing clean, efficient code that reflects both creativity and logic.
-  </p>
-
-<p>
- Outside of development, I’m constantly learning and staying up to date with the latest trends in design and tech. I'm excited to keep growing as a developer, collaborating with other creative minds, and building digital solutions that make a meaningful impact.
-   </p>
-   
-      <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">View My Work</button>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="stats">
-  <h1>My Coding Stats</h1>
-
-  <div class="charts-container">
-    <div class="chart-box">
-      <canvas id="radarChart"></canvas>
-      <div class="chart-description">Skill Balance Radar</div>
+    <div class="parallax-container">
+        <canvas id="parallax-stars-far"></canvas>
+        <canvas id="parallax-stars-close"></canvas>
     </div>
 
-    <div class="chart-box">
-      <canvas id="doughnutChart"></canvas>
-      <div class="chart-description">Technology Usage</div>
+    <div class="content-wrapper">
+        <!-- Header & Navigation -->
+        <header class="fixed top-0 left-0 right-0 z-50 header-glass">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="font-game text-lg text-cyan-400 hover:text-white transition-colors interactive-sound">PN</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors interactive-sound">About</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors interactive-sound">Projects</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors interactive-sound">Skills</a>
+                    <a href="/resume.pdf" target="_blank" class="hover:text-cyan-400 transition-colors interactive-sound">Resume</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors interactive-sound">Contact</a>
+                </nav>
+                <a href="mailto:praduman.narwariya.dev@gmail.com" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors interactive-sound">
+                    Get In Touch
+                </a>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6">
+
+            <!-- Hero Section -->
+            <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">
+                    <div class="max-w-3xl">
+                        <p class="text-cyan-400 mb-2 text-lg scroll-animate-target is-visible">Hi, my name is</p>
+                        <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 scroll-animate-target is-visible" style="transition-delay: 0.1s;">Praduman Narwariya.</h1>
+                        <h2 class="text-4xl md:text-6xl font-bold text-gray-400 mb-6 scroll-animate-target is-visible" style="transition-delay: 0.2s;">I build games for the web.</h2>
+                        <p class="text-gray-400 max-w-xl mb-8 scroll-animate-target is-visible" style="transition-delay: 0.3s;">
+                            I'm a passionate JavaScript Developer with a strong desire to create immersive 2D gaming experiences. I'm currently diving deep into the <span class="text-cyan-400 font-semibold">Phaser framework</span> and am excited by the endless possibilities at the intersection of <span class="text-cyan-400 font-semibold">gaming and AI</span>.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 scroll-animate-target is-visible" style="transition-delay: 0.4s;">
+                            <a href="#projects" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg interactive-sound">
+                                View My Work
+                            </a>
+                             <a href="/resume.pdf" target="_blank" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg interactive-sound">
+                                View Resume
+                            </a>
+                            <div class="flex items-center space-x-4">
+                                <a href="https://github.com/praduman-narwariya" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-400 transition-colors interactive-sound" aria-label="GitHub">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <a href="https://linkedin.com/in/praduman-narwariya" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-400 transition-colors interactive-sound" aria-label="LinkedIn">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex flex-col justify-center items-center scroll-animate-target left is-visible" style="transition-delay: 0.5s;">
+                        <canvas id="game-canvas" width="400" height="400"></canvas>
+                        <div class="flex gap-4 mt-4">
+                            <button id="btn-ai-demo" class="bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm interactive-sound">AI Demo</button>
+                            <button id="btn-play-mode" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm interactive-sound">Play Mode</button>
+                        </div>
+                        <p id="controls-text" class="text-gray-500 text-xs mt-2 h-4"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Me -->
+            <section id="about" class="py-24">
+                <div class="scroll-animate-target">
+                    <h2 class="text-3xl font-bold text-white mb-2 text-center"> <span class="text-cyan-400 font-game text-2xl">01.</span> About Me</h2>
+                    <div class="w-24 h-1 bg-cyan-500 mx-auto mb-12"></div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-2/3 space-y-4 text-gray-400 scroll-animate-target right">
+                        <p>
+                            Hello! I'm Praduman, a developer who loves bringing ideas to life in the browser. My journey into web development started with a simple "Hello, World!" but quickly evolved into a passion for creating dynamic, interactive experiences. It was this passion that naturally led me to the exciting world of game development.
+                        </p>
+                        <p>
+                            I have a strong foundation in <span class="text-white">JavaScript</span>, and I'm adept at applying its principles to solve complex problems. I'm currently channeling my energy into mastering the <span class="text-white">Phaser framework</span>, motivated by its power to create captivating 2D games efficiently.
+                        </p>
+                        <p>
+                            What truly excites me is the frontier where gaming meets <span class="text-white">Artificial Intelligence</span>. I'm eager to explore how AI can create more dynamic, unpredictable, and personalized game mechanics. I'm a creative problem-solver, always ready to experiment with new technologies to push the boundaries of what's possible.
+                        </p>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center scroll-animate-target left">
+                        <div class="w-64 h-64 rounded-lg shadow-lg animated-gradient-border p-1">
+                            <img src="https://placehold.co/400x400/1a202c/76e2e8?text=PN" alt="Praduman Narwariya" class="w-full h-full object-cover rounded-md bg-slate-800">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="py-24">
+                 <div class="sticky-header glass-effect -mx-6 px-6 py-4 mb-12 scroll-animate-target">
+                    <h2 class="text-3xl font-bold text-white mb-2 text-center"><span class="text-cyan-400 font-game text-2xl">02.</span> My Projects</h2>
+                    <div class="w-24 h-1 bg-cyan-500 mx-auto"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Project 1 -->
+                    <div class="scroll-animate-target rounded-lg group project-card transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-2xl animated-gradient-border p-0.5">
+                        <div class="glass-effect rounded-md w-full h-full overflow-hidden">
+                            <div class="relative overflow-hidden">
+                                <img src="https://placehold.co/600x400/1a202c/FFFFFF?text=Galactic+Defender" alt="Galactic Defender Game" class="w-full h-48 object-cover transition-transform duration-300">
+                                <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 project-overlay">
+                                    <div class="flex space-x-4">
+                                        <a href="#" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg interactive-sound">Live Demo</a>
+                                        <a href="#" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg interactive-sound">Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2">Galactic Defender</h3>
+                                <p class="text-gray-400 mb-4 text-sm">A retro-style space shooter built with vanilla JavaScript, demonstrating core programming concepts and DOM manipulation.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">JavaScript (ES6+)</span>
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">HTML5 Canvas</span>
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">CSS3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="scroll-animate-target rounded-lg group project-card transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-2xl animated-gradient-border p-0.5" style="transition-delay: 0.1s;">
+                        <div class="glass-effect rounded-md w-full h-full overflow-hidden">
+                            <div class="relative overflow-hidden">
+                                <img src="https://placehold.co/600x400/1a202c/FFFFFF?text=Pixel+Runner" alt="Pixel Runner Game" class="w-full h-48 object-cover transition-transform duration-300">
+                                <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 project-overlay">
+                                    <div class="flex space-x-4">
+                                        <a href="#" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg interactive-sound">Live Demo</a>
+                                        <a href="#" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg interactive-sound">Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2">Pixel Runner</h3>
+                                <p class="text-gray-400 mb-4 text-sm">An infinite runner game developed while learning Phaser. Features animations, physics, and scoring system.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">JavaScript</span>
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">Phaser 3</span>
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">Webpack</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                     <div class="scroll-animate-target rounded-lg group project-card transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-2xl animated-gradient-border p-0.5" style="transition-delay: 0.2s;">
+                        <div class="glass-effect rounded-md w-full h-full overflow-hidden">
+                            <div class="relative overflow-hidden">
+                                <img src="https://placehold.co/600x400/1a202c/FFFFFF?text=AI+Dungeon+Master" alt="AI Dungeon Master" class="w-full h-48 object-cover transition-transform duration-300">
+                                <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 project-overlay">
+                                     <div class="flex space-x-4">
+                                        <a href="#" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg interactive-sound">Concept Doc</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2">AI Dungeon Master (In-Progress)</h3>
+                                <p class="text-gray-400 mb-4 text-sm">An experimental project to create dynamic in-game events using AI. Explores procedural content generation.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">JavaScript</span>
+                                    <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">AI Concepts</span>
+                                     <span class="skill-tag text-xs font-semibold px-2 py-1 rounded-full text-cyan-300">Phaser 3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills" class="py-24">
+                 <div class="scroll-animate-target">
+                    <h2 class="text-3xl font-bold text-white mb-2 text-center"><span class="text-cyan-400 font-game text-2xl">03.</span> My Skills</h2>
+                    <div class="w-24 h-1 bg-cyan-500 mx-auto mb-12"></div>
+                </div>
+                <div class="max-w-4xl mx-auto text-center scroll-animate-target">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">JavaScript (ES6+)</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white bg-cyan-900/50 border-cyan-500/50">Phaser 3</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">HTML5 & Canvas</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">CSS3 & TailwindCSS</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">Git & GitHub</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">Webpack</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">Node.js</span>
+                        <span class="skill-tag text-lg font-semibold px-5 py-2 rounded-lg text-white">AI/ML Concepts</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-24 text-center">
+                <div class="scroll-animate-target">
+                    <h2 class="text-3xl font-bold text-white mb-2"><span class="text-cyan-400 font-game text-2xl">04.</span> What's Next?</h2>
+                    <div class="w-24 h-1 bg-cyan-500 mx-auto mb-6"></div>
+                    <h3 class="text-4xl font-bold text-white mb-4">Get In Touch</h3>
+                    <p class="text-gray-400 max-w-xl mx-auto mb-8">
+                        I'm actively looking for new opportunities and am excited to join a team that's passionate about pushing the boundaries of gaming. If you think I'd be a good fit, I'd love to hear from you.
+                    </p>
+                    <a href="mailto:praduman.narwariya.dev@gmail.com" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-4 px-8 rounded-lg transition-colors text-lg interactive-sound">
+                        Say Hello
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-6 text-center text-gray-500 text-sm">
+            <p>Designed & Built by Praduman Narwariya</p>
+        </footer>
     </div>
-
-    <div class="chart-box">
-      <canvas id="polarChart"></canvas>
-      <div class="chart-description">Technology Popularity</div>
-    </div>
-  </div>
-
-
-</section>
-
-
- <section class="connect-section" id="contact">
-    <div class="connect-left">
-      <h2>Connect</h2>
-      <div class="contact-info">
-        <p><strong>Name:</strong> Praduman Narwariya</p>
-        <p><strong>Email:</strong> pradumannarwariya1@gmail.com</p>
-        <p><strong>Phone:</strong> +91 9644785410</p>
-        <p><strong>Telegram:</strong> @praduman_narwariya</p>
-      </div>
-    </div>
-    <div class="connect-right">
-      <div class="social-icons">
-        <a href="#" class="icon" style="color:#E1306C;"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="icon" style="color:#1877F2;"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="icon" style="color:#333;"><i class="fab fa-github"></i></a>
-        <a href="#" class="icon" style="color:#FFFC00;"><i class="fab fa-snapchat-ghost"></i></a>
-        <a href="#" class="icon" style="color:#000;"><i class="fab fa-threads"></i></a>
-        <a href="#" class="icon" style="color:#0e76a8;"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="icon" style="color:#0088cc;"><i class="fab fa-telegram-plane"></i></a>
-      </div>
-      <div class="buttons">
-        <button onclick="openModal('contact')">Contact Me</button>
-        <button onclick="openModal('feedback')">Feedback</button>
-      </div>
-    </div>
-  </section>  <!-- Contact Modal -->  <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('contact')">&times;</span>
-      <h3>Contact Form</h3>
-      <form>
-        <input type="text" placeholder="Name" required />
-        <input type="email" placeholder="Email" required />
-        <textarea placeholder="Message" rows="4"></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </div>  <!-- Feedback Modal -->  <div id="feedbackModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('feedback')">&times;</span>
-      <h3>Feedback Form</h3>
-      <form>
-        <input type="text" placeholder="Name" required />
-        <textarea placeholder="Your Feedback" rows="4"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 PRADUMAN NARWARIYA. All rights reserved.</p>
-  </footer>
-
-
-    <script src="Script.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
- <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const buttons = document.querySelectorAll(".glass-radio-group .nav-btn");
-  const glider = document.querySelector(".glass-glider");
-
-  buttons.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-      // Remove previous active class
-      document.querySelector(".nav-btn.active")?.classList.remove("active");
-      btn.classList.add("active");
-      // Move glider
-      glider.style.transform = `translateX(${i * 100}%)`;
-    });
-  });
-</script>
-  </body>
-
-  
-          </html>
+</body>
+</html>
 
